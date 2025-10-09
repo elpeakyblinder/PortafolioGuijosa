@@ -4,15 +4,24 @@
     --clr-dark-space: #222831;
     --clr-dark-slate: #31363F;
     --clr-accent: #76ABAE;
+    --clr-accent-transparent: #76ABAE80;
     --clr-light-text: #EEEEEE;
+    --clr-text-secundary: #9CA3AF;
+    --clr-text-error: #EF4444;
 }
 
-*{
-    a{
+* {
+    a {
         text-decoration: none;
         color: inherit;
     }
-    button{
+
+    button {
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
     }
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
 }

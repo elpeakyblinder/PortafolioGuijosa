@@ -4,10 +4,10 @@ export default {
     theme: {
         extend: {
             colors: {
-                "dark-space": "#222831",
-                "dark-slate": "#31363F",
-                accent: "#76ABAE",
-                "light-text": "#EEEEEE",
+                'dark-space': '#222831',
+                'dark-slate': '#31363F',
+                'accent': '#76ABAE',
+                'light-text': '#EEEEEE',
             },
         },
     },

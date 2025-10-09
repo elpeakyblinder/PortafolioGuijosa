@@ -2,25 +2,25 @@
     <div>
         animaciones
     </div>
-    <div>
-        <h1>
+    <div class="name">
+        <h1 id="fullStack">
             Full Stack
         </h1>
-        <h2>
+        <h1 id="developer">
             Developer
-        </h2>
+        </h1>
         <h3>Carlos Guijosa</h3>
     </div>
-    <div>
+    <div class="presentation">
         <p>
             Crafting elegant solutions through clean code, modern architectures, and seamless user experiences across the entire stack.
         </p>
     </div>
-    <div>
-        <button>
+    <div class="buttonsHero">
+        <button id="viewProjects" class="px-5 py-3 bg-[var(--clr-accent)] text-[var(--clr-dark-space)]">
             View Projects
         </button>
-        <button>
+        <button id="contactMe" class="px-5 py-3 bg-[var(--clr-dark-space)]">
             Contact Me
         </button>
     </div>
@@ -29,5 +29,59 @@
             ↓
         </span>
     </div>
-
 </div>
+
+<style>
+    .containerHero {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content:  center;
+        align-items: center;
+        height: 100dvh;
+        gap: 20px;
+        background-color: var(--clr-dark-space);
+        color: var(--clr-text-secundary);
+    }
+
+    .name #fullStack{
+        font-size: 6rem;
+        color: var(--clr-light-text);
+        line-height: 1;
+    }
+
+    .name #developer{
+        font-size: 6rem;
+        color: var(--clr-accent);
+        line-height: 1;
+    }
+
+    .name h3{
+        font-size: 3rem;
+        color: var(--clr-light-text);
+    }
+
+    .presentation{
+        width: 50%;
+    }
+
+    .presentation p{
+        font-size: 1.2rem;
+    }
+
+    .buttonsHero{
+        display: flex;
+        padding: 1vh;
+        gap: 20px;
+    }
+
+    .buttonsHero button{
+        border-radius: 7px;
+        border: 1px solid var(--clr-accent);
+    }
+
+    .buttonsHero button:hover{
+        background-color: var(--clr-accent-transparent);
+        color: var(--clr-light-text);
+    }
+</style>
