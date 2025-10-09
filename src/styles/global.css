@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+    --clr-dark-space: #222831;
+    --clr-dark-slate: #31363F;
+    --clr-accent: #76ABAE;
+    --clr-light-text: #EEEEEE;
+}
+
+*{
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    button{
+        cursor: pointer;
+    }
+}
