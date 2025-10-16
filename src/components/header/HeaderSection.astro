@@ -1,0 +1,26 @@
+---
+import HeaderReact from "@/components/header/Header.jsx";
+---
+<HeaderReact client:load />
+
+<style>
+    header.scrolled {
+        border-bottom-color: var(--clr-accent-transparent);
+    }
+</style>
+
+<script>
+    const header = document.querySelector("#main-header");
+
+    if (header) {
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+    }
+</script>
