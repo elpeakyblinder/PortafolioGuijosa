@@ -5,6 +5,7 @@
     --clr-dark-slate: #31363F;
     --clr-accent: #76ABAE;
     --clr-accent-transparent: #76ABAE80;
+    --clr-accent-invisible: #76abae3b;
     --clr-light-text: #EEEEEE;
     --clr-text-secundary: #9CA3AF;
     --clr-text-error: #EF4444;
@@ -22,7 +23,16 @@
     }
 }
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--clr-dark-space);
+}
+
+body[data-scroll-locked] {
+    overflow: visible !important;
+    margin-right: 0 !important;
 }

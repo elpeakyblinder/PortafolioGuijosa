@@ -1,8 +1,9 @@
 <section class="containerHero mt-5">
-    <div>animaciones</div>
     <div class="name">
-        <h1 id="fullStack">Full Stack</h1>
-        <h1 id="developer">Developer</h1>
+        <h1>
+            <div><span id="fullStack">Full Stack</span></div>
+            <div><span id="developer">Developer</span></div>
+        </h1>
         <h3>Carlos Guijosa</h3>
     </div>
     <div class="presentation">
@@ -39,6 +40,13 @@
         color: var(--clr-text-secundary);
         padding-left: 1rem;
         padding-right: 1rem;
+    }
+
+    .name{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px
     }
 
     .name #fullStack,

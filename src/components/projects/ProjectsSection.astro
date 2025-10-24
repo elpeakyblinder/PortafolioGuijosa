@@ -48,11 +48,12 @@ const projects = [
 ---
 
 <section class="containerProjects">
-    <h1>Featured <span>Projects</span></h1>
-    <span>
-        A selection of projects showcasing full-stack development expertise and
-        innovative solutions
-    </span>
+    <div class="titleSection">
+        <h1>Proyectos <span>Destacados</span></h1>
+        <p>
+            Algunos proyectos de mi autoría que demuestran mi experiencia en el desarrollo full-stack y mi capacidad para crear soluciones innovadoras.
+        </p>
+    </div>
     <div class="cards">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
                 {
@@ -76,13 +77,14 @@ const projects = [
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: var(--text-color);
         background-color: var(--clr-dark-slate);
         color: var(--clr-light-text);
         padding: 3rem;
+        text-align: center;
     }
 
     .containerProjects h1 {
+        text-align: center;
         font-size: 3rem;
         margin-bottom: 1rem;
     }
@@ -92,10 +94,26 @@ const projects = [
         color: var(--clr-accent);
     }
 
+    .titleSection{
+        max-width: 50%;
+        text-align: center;
+    }
+
+    .titleSection p {
+        text-align: center;
+        color: var(--clr-text-secundary);
+    }
+
     .cards {
         width: 100%;
         max-width: 1500px;
         padding: 0 1rem;
         margin-top: 1rem;
+    }
+
+    @media (max-width: 1190px) {
+        .titleSection{
+            max-width: 100%;
+        }
     }
 </style>

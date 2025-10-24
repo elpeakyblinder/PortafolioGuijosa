@@ -1,0 +1,33 @@
+---
+import { experiences } from "@/components/data/ExperienceData.js";
+import ExperienceCard from "@/components/experience/ExperienceCard.jsx";
+import ExperienceTitle from "@/components/experience/ExperienceTitle.jsx";
+---
+
+<section id="experience" class="py-24 px-4 bg-[var(--clr-dark-space)]">
+    <div class="max-w-5xl mx-auto">
+        <ExperienceTitle client:visible />
+
+        <div class="space-y-2">
+            {
+                experiences.map((experience, index) => (
+                    <ExperienceCard
+                        experience={{
+                            ...experience,
+                            totalItems: experiences.length,
+                        }}
+                        index={index}
+                        client:visible
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    section{
+        position: relative;
+        z-index: 1;
+    }
+</style>

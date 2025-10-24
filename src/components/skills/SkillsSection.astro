@@ -1,0 +1,43 @@
+---
+import SkillCard from "./SkillCard.astro";
+---
+
+<section class="containerSkills">
+    <div>
+        <h1>Habilidades <span>Tech</span></h1>
+        <p>
+            Las tecnologias y herramientas con las que he trabajado a lo largo
+            de mi carrera.
+        </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+        <SkillCard />
+    </div>
+</section>
+
+<style>
+    .containerSkills {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 1rem;
+        height: auto;
+        background-color: var(--clr-dark-slate);
+        color: var(--clr-light-text);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    h1 span {
+        color: var(--clr-accent);
+    }
+
+    .containerSkills div p {
+        color: var(--clr-text-secundary);
+    }
+</style>

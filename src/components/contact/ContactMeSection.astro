@@ -1,0 +1,217 @@
+---
+import Select from "@/components/ui/Select.jsx";
+import { serviceOptions } from "@/components/data/Services.js";
+---
+
+<section>
+    <div>
+        <h1>Trabajemos <span>Juntos</span></h1>
+        <p>
+            ¿Tienes una idea o proyecto en mente? Hablemos sobre cómo hacerlo
+            realidad.
+        </p>
+    </div>
+    <div></div>
+    <div class="formContainer">
+        <div>
+            <h2>Envíame un correo a mi gmail</h2>
+            <p>
+                Completa el formulario y me pondré en contacto contigo lo antes
+                posible.
+            </p>
+        </div>
+        <div class="form">
+            <form action="">
+                <div>
+                    <label for="name">Nombre <span>*</span></label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Ej. Thomas Shelby"
+                        required
+                    />
+                </div>
+                <div>
+                    <label for="email">Correo Electrónico <span>*</span></label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="thomas@ejemplo.com"
+                        required
+                    />
+                </div>
+                <div>
+                    <label for="number">Teléfono (opcional)</label>
+                    <input
+                        type="text"
+                        id="number"
+                        name="number"
+                        placeholder="Ej. +52 225 1254 2563"
+                    />
+                </div>
+                <div>
+                    <label for="service"
+                        >Servicio de interés <span>*</span></label
+                    >
+                    <Select
+                        options={serviceOptions}
+                        placeholder="Selecciona una opción"
+                        name="service"
+                        required={true}
+                        onChange={() => {}}
+                        client:load
+                    />
+                </div>
+                <div class="message">
+                    <label for="message">Mensaje <span>*</span></label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        placeholder="Cuéntame sobre tu proyecto, ideas o locuras..."
+                        class="field-sizing-content min-h-16 resize-none"
+                        required></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5rem 1rem;
+        gap: 2rem;
+        background-color: var(--clr-dark-space);
+        color: var(--clr-light-text);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        text-align: center;
+        margin-bottom: 0.8rem;
+    }
+
+    h1 span {
+        color: var(--clr-accent);
+    }
+
+    div p {
+        color: var(--clr-text-secundary);
+    }
+
+    .formContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 40%;
+        background-color: var(--clr-dark-slate);
+        padding: 2rem;
+        border-radius: 15px;
+        border: solid 1px var(--clr-accent-transparent);
+        gap: 3rem;
+    }
+
+    .form {
+        width: 100%;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        width: 100%;
+    }
+
+    label {
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+
+    label span {
+        color: var(--clr-accent);
+    }
+
+    .message {
+        grid-column: span 2;
+    }
+
+    form div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        border: solid 1px var(--clr-accent-invisible);
+        color: var(--clr-light-text);
+    }
+
+    input::placeholder,
+    select::placeholder,
+    textarea::placeholder {
+        font-size: 0.8rem;
+    }
+
+    select option {
+        font-size: 0.9rem;
+    }
+
+    input {
+        transition:
+            color 150ms ease,
+            box-shadow 150ms ease,
+            border-color 150ms ease;
+        outline: none;
+    }
+
+    input:focus,
+    input:focus-visible {
+        border-color: #76abae;
+        box-shadow: 0 0 0 3px rgba(118, 171, 174, 0.5);
+        outline: none;
+    }
+
+    input::selection {
+        background-color: #76abae;
+        color: #222831;
+    }
+
+    select {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        border: solid 1px var(--clr-accent-invisible);
+        color: var(--clr-light-text);
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    select option {
+        background-color: var(--clr-dark-slate);
+        color: var(--clr-light-text);
+        font-size: 0.9rem;
+    }
+</style>

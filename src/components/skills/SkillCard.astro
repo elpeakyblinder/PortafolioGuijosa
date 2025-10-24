@@ -1,0 +1,179 @@
+---
+import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-react'
+---
+
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Globe /> </span>
+        </div>
+        <div class="title">
+            Frontend
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Tailwind CSS</li>
+            <li>TypeScript</li>
+            <li>Astro</li>
+            <li>NextJS</li>
+            <li>React</li>
+        </ul>
+    </div>
+</div>
+
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Server /> </span>
+        </div>
+        <div class="title">
+            Backend
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>Laravel</li>
+            <li>Python</li>
+            <li>NodeJS</li>
+        </ul>
+    </div>
+</div>
+
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Database /> </span>
+        </div>
+        <div class="title">
+            Database
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>Neon Serverless</li>
+            <li>MariaDB</li>
+            <li>MySQL</li>
+        </ul>
+    </div>
+</div>
+
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Cloud /> </span>
+        </div>
+        <div class="title">
+            DevOps
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>Vercel</li>
+            <li>Cloudflare</li>
+        </ul>
+    </div>
+</div>
+
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Smartphone /> </span>
+        </div>
+        <div class="title">
+            Mobile
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>Ionic</li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Terminal /> </span>
+        </div>
+        <div class="title">
+            Tools
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>Git</li>
+            <li>Figma</li>
+            <li>Bruno</li>
+            <li>VS Code</li>
+            <li>Windsurf</li>
+        </ul>
+    </div>
+</div>
+
+
+
+<style>
+    .skillCard{
+        display: flex;
+        flex-direction: column;
+        background-color: var(--clr-dark-slate);
+        padding: 1.5rem;
+        gap: 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+        border: solid 1px var(--clr-accent-transparent);
+        max-width: 400px;
+        height: 170px;
+    }
+
+    .skillCard:hover{
+        border: solid 1px var(--clr-accent);
+    }
+
+    ul{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        list-style-type: none;
+        color: var(--clr-text-secundary);
+    }
+
+    li{
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .skillHeader{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .title{
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
+
+    /* .icon{
+        padding: 5px;
+        border-radius: 50%;
+    } */
+
+    .icon span{
+        transition: color 0.3s ease-in-out;
+        color: var(--clr-accent);
+    }
+
+    .skillCard:hover .icon {
+        background-color: var(--clr-accent-transparent); 
+        transition: background-color 0.3s ease-in-out;
+    }
+
+</style>
