@@ -36,3 +36,20 @@ body[data-scroll-locked] {
     overflow: visible !important;
     margin-right: 0 !important;
 }
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-select__menu {
+    animation: fadeSlide 0.25s ease forwards;
+    transform-origin: top center;
+}

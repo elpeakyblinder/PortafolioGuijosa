@@ -1,6 +1,7 @@
 ---
 import Select from "@/components/ui/Select.jsx";
 import { serviceOptions } from "@/components/data/Services.js";
+import { Send } from "lucide-react";
 ---
 
 <section>
@@ -61,7 +62,7 @@ import { serviceOptions } from "@/components/data/Services.js";
                         name="service"
                         required={true}
                         onChange={() => {}}
-                        client:load
+                        client:only="react"
                     />
                 </div>
                 <div class="message">
@@ -74,6 +75,7 @@ import { serviceOptions } from "@/components/data/Services.js";
                         class="field-sizing-content min-h-16 resize-none"
                         required></textarea>
                 </div>
+                <button type="submit"><Send height={20} width={20}/> Enviar Mensaje</button>
             </form>
         </div>
     </div>
@@ -116,7 +118,7 @@ import { serviceOptions } from "@/components/data/Services.js";
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 40%;
+        max-width: 90%;
         background-color: var(--clr-dark-slate);
         padding: 2rem;
         border-radius: 15px;
@@ -177,7 +179,7 @@ import { serviceOptions } from "@/components/data/Services.js";
         font-size: 0.9rem;
     }
 
-    input {
+    input, textarea {
         transition:
             color 150ms ease,
             box-shadow 150ms ease,
@@ -186,7 +188,9 @@ import { serviceOptions } from "@/components/data/Services.js";
     }
 
     input:focus,
-    input:focus-visible {
+    input:focus-visible,
+    textarea:focus,
+    textarea:focus-visible {
         border-color: #76abae;
         box-shadow: 0 0 0 3px rgba(118, 171, 174, 0.5);
         outline: none;
@@ -197,21 +201,43 @@ import { serviceOptions } from "@/components/data/Services.js";
         color: #222831;
     }
 
-    select {
-        width: 100%;
+    form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        grid-column: span 2;
         padding: 0.8rem;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--clr-dark-space);
+        background-color: var(--clr-accent);
+        border: none;
         border-radius: 8px;
-        border: solid 1px var(--clr-accent-invisible);
-        color: var(--clr-light-text);
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
+        cursor: pointer;
+        transition:
+            background-color 150ms ease,
+            box-shadow 150ms ease,
+            transform 150ms ease;
     }
 
-    select option {
-        background-color: var(--clr-dark-slate);
-        color: var(--clr-light-text);
-        font-size: 0.9rem;
+    form button:hover {
+        background-color: #5e9294;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.02);
     }
+
+    @media (max-width: 768px) {
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form button{
+            width: 100%;
+        }
+
+    }
+
 </style>

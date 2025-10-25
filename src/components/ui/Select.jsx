@@ -55,8 +55,6 @@ const customStyles = {
         boxShadow: "0 0 10px rgba(0,0,0,0.4)",
         marginTop: "0.5rem",
         zIndex: 99,
-        animation: "fadeSlide 0.25s ease forwards",
-        transformOrigin: "top center",
     }),
 
     option: (base, state) => ({
