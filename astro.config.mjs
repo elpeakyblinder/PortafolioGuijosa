@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { fileURLToPath } from "url";
 import react from "@astrojs/react";
+import vercel from "@astrojs/vercel";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
@@ -22,4 +23,6 @@ export default defineConfig({
       include: ["lucide-react"],
     },
   },
+  output: 'server',
+  adapter: vercel(),
 });
