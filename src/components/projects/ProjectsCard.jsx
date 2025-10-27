@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Sparkles, Github, ExternalLink } from 'lucide-react';
+import { Sparkles, Github } from 'lucide-react';
 
 export default function ProjectCard({ project, index }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -60,7 +60,7 @@ export default function ProjectCard({ project, index }) {
                         <h3 className="text-2xl text-[var(--clr-light-text)]">{project.title}</h3>
                     </div>
                     <p
-                        className="text-[var(--clr-text-secundary)] mb-6 leading-relaxed"
+                        className="text-[var(--clr-text-secundary)] mb-6 leading-relaxed text-left"
                         dangerouslySetInnerHTML={{ __html: project.description }}
                     />
                     <div className="flex flex-wrap items-center gap-4">

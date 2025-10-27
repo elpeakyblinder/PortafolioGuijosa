@@ -1,13 +1,11 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import Briefcase from 'lucide-react/dist/esm/icons/briefcase';
-import Calendar from 'lucide-react/dist/esm/icons/calendar';
-import MapPin from 'lucide-react/dist/esm/icons/map-pin';
-import TrendingUp from 'lucide-react/dist/esm/icons/trending-up';
-import Award from 'lucide-react/dist/esm/icons/award';
-import Code2 from 'lucide-react/dist/esm/icons/code-2';
+import {Briefcase, Calendar, MapPin, TrendingUp, Award, Code2} from 'lucide-react';
 
 const iconMap = {
+    Briefcase,
+    Calendar,
+    MapPin,
     TrendingUp,
     Award,
     Code2
