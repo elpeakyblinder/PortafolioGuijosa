@@ -1,5 +1,5 @@
-import { j as joinPaths, i as isRemotePath, t as typeHandlers, a as types } from './index_DKHmmOtR.mjs';
-import { A as AstroError, E as ExpectedImage, L as LocalImageUsedWrongly, M as MissingImageDimension, U as UnsupportedImageFormat, I as IncompatibleDescriptorOptions, a as UnsupportedImageConversion, t as toStyleString, N as NoImageMetadata, F as FailedToFetchRemoteImageDimensions, b as ExpectedImageOptions, c as ExpectedNotESMImage, d as InvalidImageService, e as createComponent, f as createAstro, g as ImageMissingAlt, m as maybeRenderHead, h as addAttribute, s as spreadAttributes, r as renderTemplate, i as ExperimentalFontsNotEnabled, j as FontFamilyNotFound, u as unescapeHTML } from './astro/server_jSqP8DwZ.mjs';
+import { i as isRemoteAllowed, j as joinPaths, a as isRemotePath, t as typeHandlers, b as types } from './index_DcV6kM1H.mjs';
+import { A as AstroError, E as ExpectedImage, L as LocalImageUsedWrongly, M as MissingImageDimension, U as UnsupportedImageFormat, I as IncompatibleDescriptorOptions, a as UnsupportedImageConversion, t as toStyleString, N as NoImageMetadata, F as FailedToFetchRemoteImageDimensions, b as ExpectedImageOptions, c as ExpectedNotESMImage, d as InvalidImageService, e as createComponent, f as createAstro, g as ImageMissingAlt, m as maybeRenderHead, h as addAttribute, s as spreadAttributes, r as renderTemplate, i as ExperimentalFontsNotEnabled, j as FontFamilyNotFound, u as unescapeHTML } from './astro/server_DG2Y2vJ7.mjs';
 import '../renderers.mjs';
 
 const VALID_SUPPORTED_FORMATS = [
@@ -124,56 +124,6 @@ const getSizesAttribute = ({
       return void 0;
   }
 };
-
-function matchPattern(url, remotePattern) {
-  return matchProtocol(url, remotePattern.protocol) && matchHostname(url, remotePattern.hostname, true) && matchPort(url, remotePattern.port) && matchPathname(url, remotePattern.pathname, true);
-}
-function matchPort(url, port) {
-  return !port || port === url.port;
-}
-function matchProtocol(url, protocol) {
-  return !protocol || protocol === url.protocol.slice(0, -1);
-}
-function matchHostname(url, hostname, allowWildcard = false) {
-  if (!hostname) {
-    return true;
-  } else if (!allowWildcard || !hostname.startsWith("*")) {
-    return hostname === url.hostname;
-  } else if (hostname.startsWith("**.")) {
-    const slicedHostname = hostname.slice(2);
-    return slicedHostname !== url.hostname && url.hostname.endsWith(slicedHostname);
-  } else if (hostname.startsWith("*.")) {
-    const slicedHostname = hostname.slice(1);
-    const additionalSubdomains = url.hostname.replace(slicedHostname, "").split(".").filter(Boolean);
-    return additionalSubdomains.length === 1;
-  }
-  return false;
-}
-function matchPathname(url, pathname, allowWildcard = false) {
-  if (!pathname) {
-    return true;
-  } else if (!allowWildcard || !pathname.endsWith("*")) {
-    return pathname === url.pathname;
-  } else if (pathname.endsWith("/**")) {
-    const slicedPathname = pathname.slice(0, -2);
-    return slicedPathname !== url.pathname && url.pathname.startsWith(slicedPathname);
-  } else if (pathname.endsWith("/*")) {
-    const slicedPathname = pathname.slice(0, -1);
-    const additionalPathChunks = url.pathname.replace(slicedPathname, "").split("/").filter(Boolean);
-    return additionalPathChunks.length === 1;
-  }
-  return false;
-}
-function isRemoteAllowed(src, {
-  domains,
-  remotePatterns
-}) {
-  if (!URL.canParse(src)) {
-    return false;
-  }
-  const url = new URL(src);
-  return domains.some((domain) => matchHostname(url, domain)) || remotePatterns.some((remotePattern) => matchPattern(url, remotePattern));
-}
 
 function isESMImportedImage(src) {
   return typeof src === "object" || typeof src === "function" && "src" in src;
@@ -524,7 +474,7 @@ async function getConfiguredImageService() {
   if (!globalThis?.astroAsset?.imageService) {
     const { default: service } = await import(
       // @ts-expect-error
-      './sharp_DzpX6o1v.mjs'
+      './sharp_OZxw6w18.mjs'
     ).catch((e) => {
       const error = new AstroError(InvalidImageService);
       error.cause = e;
@@ -690,7 +640,7 @@ const $$Image = createComponent(async ($$result, $$props, $$slots) => {
   }
   const { class: className, ...attributes } = { ...additionalAttributes, ...image.attributes };
   return renderTemplate`${maybeRenderHead()}<img${addAttribute(image.src, "src")}${spreadAttributes(attributes)}${addAttribute(className, "class")}>`;
-}, "C:/Users/Probook/Desktop/GuijosaPortafolio/node_modules/.pnpm/astro@5.14.1_@types+node@24_8052290f6c6118b171c78a272cf8d9b0/node_modules/astro/components/Image.astro", void 0);
+}, "C:/Users/Probook/Desktop/GuijosaPortafolio/node_modules/.pnpm/astro@5.15.1_@types+node@24_c45777625d1f29e1c58c95acdf69367e/node_modules/astro/components/Image.astro", void 0);
 
 const mimes = {
   "3g2": "video/3gpp2",
@@ -1208,11 +1158,46 @@ const $$Picture = createComponent(async ($$result, $$props, $$slots) => {
     const srcsetAttribute = props.densities || !props.densities && !props.widths && !useResponsive ? `${image.src}${image.srcSet.values.length > 0 ? ", " + image.srcSet.attribute : ""}` : image.srcSet.attribute;
     return renderTemplate`<source${addAttribute(srcsetAttribute, "srcset")}${addAttribute(lookup(image.options.format ?? image.src) ?? `image/${image.options.format}`, "type")}${spreadAttributes(sourceAdditionalAttributes)}>`;
   })}  <img${addAttribute(fallbackImage.src, "src")}${spreadAttributes(attributes)}${addAttribute(className, "class")}> </picture>`;
-}, "C:/Users/Probook/Desktop/GuijosaPortafolio/node_modules/.pnpm/astro@5.14.1_@types+node@24_8052290f6c6118b171c78a272cf8d9b0/node_modules/astro/components/Picture.astro", void 0);
+}, "C:/Users/Probook/Desktop/GuijosaPortafolio/node_modules/.pnpm/astro@5.15.1_@types+node@24_c45777625d1f29e1c58c95acdf69367e/node_modules/astro/components/Picture.astro", void 0);
 
 const fontsMod = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null
 }, Symbol.toStringTag, { value: 'Module' }));
+
+function filterPreloads(data, preload) {
+  if (!preload) {
+    return null;
+  }
+  if (preload === true) {
+    return data;
+  }
+  return data.filter(
+    ({ weight, style, subset }) => preload.some((p) => {
+      if (p.weight !== void 0 && weight !== void 0 && !checkWeight(p.weight.toString(), weight)) {
+        return false;
+      }
+      if (p.style !== void 0 && p.style !== style) {
+        return false;
+      }
+      if (p.subset !== void 0 && p.subset !== subset) {
+        return false;
+      }
+      return true;
+    })
+  );
+}
+function checkWeight(input, target) {
+  const trimmedInput = input.trim();
+  if (trimmedInput.includes(" ")) {
+    return trimmedInput === target;
+  }
+  if (target.includes(" ")) {
+    const [a, b] = target.split(" ");
+    const parsedInput = Number.parseInt(input);
+    return parsedInput >= Number.parseInt(a) && parsedInput <= Number.parseInt(b);
+  }
+  return input === target;
+}
 
 const $$Astro = createAstro();
 const $$Font = createComponent(($$result, $$props, $$slots) => {
@@ -1230,8 +1215,9 @@ const $$Font = createComponent(($$result, $$props, $$slots) => {
       message: FontFamilyNotFound.message(cssVariable)
     });
   }
-  return renderTemplate`${preload && data.preloadData.map(({ url, type }) => renderTemplate`<link rel="preload"${addAttribute(url, "href")} as="font"${addAttribute(`font/${type}`, "type")} crossorigin>`)}<style>${unescapeHTML(data.css)}</style>`;
-}, "C:/Users/Probook/Desktop/GuijosaPortafolio/node_modules/.pnpm/astro@5.14.1_@types+node@24_8052290f6c6118b171c78a272cf8d9b0/node_modules/astro/components/Font.astro", void 0);
+  const filteredPreloadData = filterPreloads(data.preloadData, preload);
+  return renderTemplate`<style>${unescapeHTML(data.css)}</style>${filteredPreloadData?.map(({ url, type }) => renderTemplate`<link rel="preload"${addAttribute(url, "href")} as="font"${addAttribute(`font/${type}`, "type")} crossorigin>`)}`;
+}, "C:/Users/Probook/Desktop/GuijosaPortafolio/node_modules/.pnpm/astro@5.15.1_@types+node@24_c45777625d1f29e1c58c95acdf69367e/node_modules/astro/components/Font.astro", void 0);
 
 const imageConfig = {"endpoint":{"route":"/_image"},"service":{"entrypoint":"astro/assets/services/sharp","config":{}},"domains":[],"remotePatterns":[],"responsiveStyles":false};
 							const getImage = async (options) => await getImage$1(options, imageConfig);
@@ -1292,6 +1278,9 @@ const GET = async ({ request }) => {
       return new Response("Forbidden", { status: 403 });
     }
     const sourceUrl = new URL(transform.src, url.origin);
+    if (!isRemoteImage && sourceUrl.origin !== url.origin) {
+      return new Response("Forbidden", { status: 403 });
+    }
     inputBuffer = await loadRemoteImage(sourceUrl, isRemoteImage ? new Headers() : request.headers);
     if (!inputBuffer) {
       return new Response("Not Found", { status: 404 });

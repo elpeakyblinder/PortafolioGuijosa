@@ -39,16 +39,56 @@ function joinPaths(...paths) {
     }
   }).join("/");
 }
-const URL_PROTOCOL_REGEX = /^(?:(?:http|ftp|https|ws):?\/\/|\/\/)/;
 function isRemotePath(src) {
-  const decoded = src.replace(/%5C/gi, "\\");
+  if (!src) return false;
+  const trimmed = src.trim();
+  if (!trimmed) return false;
+  let decoded = trimmed;
+  let previousDecoded = "";
+  let maxIterations = 10;
+  while (decoded !== previousDecoded && maxIterations > 0) {
+    previousDecoded = decoded;
+    try {
+      decoded = decodeURIComponent(decoded);
+    } catch {
+      break;
+    }
+    maxIterations--;
+  }
+  if (/^[a-zA-Z]:/.test(decoded)) {
+    return false;
+  }
+  if (decoded[0] === "/" && decoded[1] !== "/" && decoded[1] !== "\\") {
+    return false;
+  }
   if (decoded[0] === "\\") {
     return true;
   }
-  if (/^(?:http|https|ftp|ws):\\/.test(decoded)) {
+  if (decoded.startsWith("//")) {
     return true;
   }
-  return URL_PROTOCOL_REGEX.test(decoded) || decoded.startsWith("data:");
+  try {
+    const url = new URL(decoded, "http://n");
+    if (url.username || url.password) {
+      return true;
+    }
+    if (decoded.includes("@") && !url.pathname.includes("@") && !url.search.includes("@")) {
+      return true;
+    }
+    if (url.origin !== "http://n") {
+      const protocol = url.protocol.toLowerCase();
+      if (protocol === "file:") {
+        return false;
+      }
+      return true;
+    }
+    if (URL.canParse(decoded)) {
+      return true;
+    }
+    return false;
+  } catch {
+    return true;
+  }
 }
 function slash(path) {
   return path.replace(/\\/g, "/");
@@ -60,6 +100,62 @@ function fileExtension(path) {
 const WITH_FILE_EXT = /\/[^/]+\.\w+$/;
 function hasFileExtension(path) {
   return WITH_FILE_EXT.test(path);
+}
+
+function matchPattern(url, remotePattern) {
+  return matchProtocol(url, remotePattern.protocol) && matchHostname(url, remotePattern.hostname, true) && matchPort(url, remotePattern.port) && matchPathname(url, remotePattern.pathname, true);
+}
+function matchPort(url, port) {
+  return !port || port === url.port;
+}
+function matchProtocol(url, protocol) {
+  return !protocol || protocol === url.protocol.slice(0, -1);
+}
+function matchHostname(url, hostname, allowWildcard = false) {
+  if (!hostname) {
+    return true;
+  } else if (!allowWildcard || !hostname.startsWith("*")) {
+    return hostname === url.hostname;
+  } else if (hostname.startsWith("**.")) {
+    const slicedHostname = hostname.slice(2);
+    return slicedHostname !== url.hostname && url.hostname.endsWith(slicedHostname);
+  } else if (hostname.startsWith("*.")) {
+    const slicedHostname = hostname.slice(1);
+    const additionalSubdomains = url.hostname.replace(slicedHostname, "").split(".").filter(Boolean);
+    return additionalSubdomains.length === 1;
+  }
+  return false;
+}
+function matchPathname(url, pathname, allowWildcard = false) {
+  if (!pathname) {
+    return true;
+  } else if (!allowWildcard || !pathname.endsWith("*")) {
+    return pathname === url.pathname;
+  } else if (pathname.endsWith("/**")) {
+    const slicedPathname = pathname.slice(0, -2);
+    return slicedPathname !== url.pathname && url.pathname.startsWith(slicedPathname);
+  } else if (pathname.endsWith("/*")) {
+    const slicedPathname = pathname.slice(0, -1);
+    const additionalPathChunks = url.pathname.replace(slicedPathname, "").split("/").filter(Boolean);
+    return additionalPathChunks.length === 1;
+  }
+  return false;
+}
+function isRemoteAllowed(src, {
+  domains,
+  remotePatterns
+}) {
+  if (!URL.canParse(src)) {
+    return false;
+  }
+  const url = new URL(src);
+  if (url.protocol === "data:") {
+    return true;
+  }
+  if (!["http:", "https:"].includes(url.protocol)) {
+    return false;
+  }
+  return domains.some((domain) => matchHostname(url, domain)) || remotePatterns.some((remotePattern) => matchPattern(url, remotePattern));
 }
 
 const decoder = new TextDecoder();
@@ -793,4 +889,4 @@ const typeHandlers = /* @__PURE__ */ new Map([
 ]);
 const types = Array.from(typeHandlers.keys());
 
-export { types as a, appendForwardSlash as b, trimSlashes as c, isInternalPath as d, collapseDuplicateTrailingSlashes as e, fileExtension as f, hasFileExtension as h, isRemotePath as i, joinPaths as j, prependForwardSlash as p, removeTrailingForwardSlash as r, slash as s, typeHandlers as t };
+export { isRemotePath as a, types as b, appendForwardSlash as c, trimSlashes as d, isInternalPath as e, fileExtension as f, collapseDuplicateTrailingSlashes as g, hasFileExtension as h, isRemoteAllowed as i, joinPaths as j, matchPattern as m, prependForwardSlash as p, removeTrailingForwardSlash as r, slash as s, typeHandlers as t };

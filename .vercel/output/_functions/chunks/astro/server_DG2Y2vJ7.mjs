@@ -1,4 +1,4 @@
-const ASTRO_VERSION = "5.14.1";
+const ASTRO_VERSION = "5.15.1";
 const REROUTE_DIRECTIVE_HEADER = "X-Astro-Reroute";
 const REWRITE_DIRECTIVE_HEADER_KEY = "X-Astro-Rewrite";
 const REWRITE_DIRECTIVE_HEADER_VALUE = "yes";
@@ -449,33 +449,124 @@ function createAstro(site) {
   };
 }
 
-let FORCE_COLOR, NODE_DISABLE_COLORS, NO_COLOR, TERM, isTTY=true;
-if (typeof process !== 'undefined') {
-	({ FORCE_COLOR, NODE_DISABLE_COLORS, NO_COLOR, TERM } = process.env || {});
-	isTTY = process.stdout && process.stdout.isTTY;
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
 
-const $ = {
-	enabled: !NODE_DISABLE_COLORS && NO_COLOR == null && TERM !== 'dumb' && (
-		FORCE_COLOR != null && FORCE_COLOR !== '0' || isTTY
-	)
-};
+function getAugmentedNamespace(n) {
+  if (Object.prototype.hasOwnProperty.call(n, '__esModule')) return n;
+  var f = n.default;
+	if (typeof f == "function") {
+		var a = function a () {
+			if (this instanceof a) {
+        return Reflect.construct(f, arguments, this.constructor);
+			}
+			return f.apply(this, arguments);
+		};
+		a.prototype = f.prototype;
+  } else a = {};
+  Object.defineProperty(a, '__esModule', {value: true});
+	Object.keys(n).forEach(function (k) {
+		var d = Object.getOwnPropertyDescriptor(n, k);
+		Object.defineProperty(a, k, d.get ? d : {
+			enumerable: true,
+			get: function () {
+				return n[k];
+			}
+		});
+	});
+	return a;
+}
 
-function init(x, y) {
-	let rgx = new RegExp(`\\x1b\\[${y}m`, 'g');
-	let open = `\x1b[${x}m`, close = `\x1b[${y}m`;
+var picocolors = {exports: {}};
 
-	return function (txt) {
-		if (!$.enabled || txt == null) return txt;
-		return open + (!!~(''+txt).indexOf(close) ? txt.replace(rgx, close + open) : txt) + close;
+var hasRequiredPicocolors;
+
+function requirePicocolors () {
+	if (hasRequiredPicocolors) return picocolors.exports;
+	hasRequiredPicocolors = 1;
+	let p = process || {}, argv = p.argv || [], env = p.env || {};
+	let isColorSupported =
+		!(!!env.NO_COLOR || argv.includes("--no-color")) &&
+		(!!env.FORCE_COLOR || argv.includes("--color") || p.platform === "win32" || ((p.stdout || {}).isTTY && env.TERM !== "dumb") || !!env.CI);
+
+	let formatter = (open, close, replace = open) =>
+		input => {
+			let string = "" + input, index = string.indexOf(close, open.length);
+			return ~index ? open + replaceClose(string, close, replace, index) + close : open + string + close
+		};
+
+	let replaceClose = (string, close, replace, index) => {
+		let result = "", cursor = 0;
+		do {
+			result += string.substring(cursor, index) + replace;
+			cursor = index + close.length;
+			index = string.indexOf(close, cursor);
+		} while (~index)
+		return result + string.substring(cursor)
 	};
+
+	let createColors = (enabled = isColorSupported) => {
+		let f = enabled ? formatter : () => String;
+		return {
+			isColorSupported: enabled,
+			reset: f("\x1b[0m", "\x1b[0m"),
+			bold: f("\x1b[1m", "\x1b[22m", "\x1b[22m\x1b[1m"),
+			dim: f("\x1b[2m", "\x1b[22m", "\x1b[22m\x1b[2m"),
+			italic: f("\x1b[3m", "\x1b[23m"),
+			underline: f("\x1b[4m", "\x1b[24m"),
+			inverse: f("\x1b[7m", "\x1b[27m"),
+			hidden: f("\x1b[8m", "\x1b[28m"),
+			strikethrough: f("\x1b[9m", "\x1b[29m"),
+
+			black: f("\x1b[30m", "\x1b[39m"),
+			red: f("\x1b[31m", "\x1b[39m"),
+			green: f("\x1b[32m", "\x1b[39m"),
+			yellow: f("\x1b[33m", "\x1b[39m"),
+			blue: f("\x1b[34m", "\x1b[39m"),
+			magenta: f("\x1b[35m", "\x1b[39m"),
+			cyan: f("\x1b[36m", "\x1b[39m"),
+			white: f("\x1b[37m", "\x1b[39m"),
+			gray: f("\x1b[90m", "\x1b[39m"),
+
+			bgBlack: f("\x1b[40m", "\x1b[49m"),
+			bgRed: f("\x1b[41m", "\x1b[49m"),
+			bgGreen: f("\x1b[42m", "\x1b[49m"),
+			bgYellow: f("\x1b[43m", "\x1b[49m"),
+			bgBlue: f("\x1b[44m", "\x1b[49m"),
+			bgMagenta: f("\x1b[45m", "\x1b[49m"),
+			bgCyan: f("\x1b[46m", "\x1b[49m"),
+			bgWhite: f("\x1b[47m", "\x1b[49m"),
+
+			blackBright: f("\x1b[90m", "\x1b[39m"),
+			redBright: f("\x1b[91m", "\x1b[39m"),
+			greenBright: f("\x1b[92m", "\x1b[39m"),
+			yellowBright: f("\x1b[93m", "\x1b[39m"),
+			blueBright: f("\x1b[94m", "\x1b[39m"),
+			magentaBright: f("\x1b[95m", "\x1b[39m"),
+			cyanBright: f("\x1b[96m", "\x1b[39m"),
+			whiteBright: f("\x1b[97m", "\x1b[39m"),
+
+			bgBlackBright: f("\x1b[100m", "\x1b[49m"),
+			bgRedBright: f("\x1b[101m", "\x1b[49m"),
+			bgGreenBright: f("\x1b[102m", "\x1b[49m"),
+			bgYellowBright: f("\x1b[103m", "\x1b[49m"),
+			bgBlueBright: f("\x1b[104m", "\x1b[49m"),
+			bgMagentaBright: f("\x1b[105m", "\x1b[49m"),
+			bgCyanBright: f("\x1b[106m", "\x1b[49m"),
+			bgWhiteBright: f("\x1b[107m", "\x1b[49m"),
+		}
+	};
+
+	picocolors.exports = createColors();
+	picocolors.exports.createColors = createColors;
+	return picocolors.exports;
 }
-const bold = init(1, 22);
-const dim = init(2, 22);
-const red = init(31, 39);
-const green = init(32, 39);
-const yellow = init(33, 39);
-const blue = init(34, 39);
+
+var picocolorsExports = /*@__PURE__*/ requirePicocolors();
+const colors = /*@__PURE__*/getDefaultExportFromCjs(picocolorsExports);
 
 async function renderEndpoint(mod, context, isPrerendered, logger) {
   const { request, url } = context;
@@ -487,7 +578,7 @@ async function renderEndpoint(mod, context, isPrerendered, logger) {
   if (isPrerendered && !["GET", "HEAD"].includes(method)) {
     logger.warn(
       "router",
-      `${url.pathname} ${bold(
+      `${url.pathname} ${colors.bold(
         method
       )} requests are not available in static endpoints. Mark this page as server-rendered (\`export const prerender = false;\`) or update your config to \`output: 'server'\` to make all your pages server-rendered by default.`
     );
@@ -1049,7 +1140,7 @@ function isRenderInstruction(chunk) {
 }
 
 const voidElementNames = /^(area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)$/i;
-const htmlBooleanAttributes = /^(?:allowfullscreen|async|autofocus|autoplay|checked|controls|default|defer|disabled|disablepictureinpicture|disableremoteplayback|formnovalidate|hidden|inert|loop|nomodule|novalidate|open|playsinline|readonly|required|reversed|scoped|seamless|selected|itemscope)$/i;
+const htmlBooleanAttributes = /^(?:allowfullscreen|async|autofocus|autoplay|checked|controls|default|defer|disabled|disablepictureinpicture|disableremoteplayback|formnovalidate|hidden|inert|loop|muted|nomodule|novalidate|open|playsinline|readonly|required|reversed|scoped|seamless|selected|itemscope)$/i;
 const AMPERSAND_REGEX = /&/g;
 const DOUBLE_QUOTE_REGEX = /"/g;
 const STATIC_DIRECTIVES = /* @__PURE__ */ new Set(["set:html", "set:text"]);
@@ -5671,9 +5762,12 @@ class ServerIslandComponent {
         )
       );
     }
+    const adapterHeaders = this.result.internalFetchHeaders || {};
+    const headersJson = safeJsonStringify(adapterHeaders);
     const method = useGETRequest ? (
       // GET request
-      `let response = await fetch('${serverIslandUrl}');`
+      `const headers = new Headers(${headersJson});
+let response = await fetch('${serverIslandUrl}', { headers });`
     ) : (
       // POST request
       `let data = {
@@ -5681,9 +5775,11 @@ class ServerIslandComponent {
 	encryptedProps: ${safeJsonStringify(propsEncrypted)},
 	slots: ${safeJsonStringify(renderedSlots)},
 };
+const headers = new Headers({ 'Content-Type': 'application/json', ...${headersJson} });
 let response = await fetch('${serverIslandUrl}', {
 	method: 'POST',
 	body: JSON.stringify(data),
+	headers,
 });`
     );
     this.islandContent = `${method}replaceServerIsland('${hostId}', response);`;
@@ -6865,33 +6961,6 @@ async function renderScript(result, id) {
   );
 }
 
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function getAugmentedNamespace(n) {
-  if (Object.prototype.hasOwnProperty.call(n, '__esModule')) return n;
-  var f = n.default;
-	if (typeof f == "function") {
-		var a = function a () {
-			if (this instanceof a) {
-        return Reflect.construct(f, arguments, this.constructor);
-			}
-			return f.apply(this, arguments);
-		};
-		a.prototype = f.prototype;
-  } else a = {};
-  Object.defineProperty(a, '__esModule', {value: true});
-	Object.keys(n).forEach(function (k) {
-		var d = Object.getOwnPropertyDescriptor(n, k);
-		Object.defineProperty(a, k, d.get ? d : {
-			enumerable: true,
-			get: function () {
-				return n[k];
-			}
-		});
-	});
-	return a;
-}
-
 /*! https://mths.be/cssesc v3.0.0 by @mathias */
 
 var cssesc_1;
@@ -7032,4 +7101,4 @@ function spreadAttributes(values = {}, _name, { class: scopedClassName } = {}) {
   return markHTMLString(output);
 }
 
-export { PrerenderDynamicEndpointPathCollide as $, AstroError as A, bold as B, red as C, yellow as D, ExpectedImage as E, FailedToFetchRemoteImageDimensions as F, dim as G, blue as H, IncompatibleDescriptorOptions as I, MiddlewareNoDataOrNextCalled as J, MiddlewareNotAResponse as K, LocalImageUsedWrongly as L, MissingImageDimension as M, NoImageMetadata as N, originPathnameSymbol as O, RewriteWithBodyUsed as P, GetStaticPathsRequired as Q, ROUTE_TYPE_HEADER as R, InvalidGetStaticPathsReturn as S, InvalidGetStaticPathsEntry as T, UnsupportedImageFormat as U, GetStaticPathsExpectedParams as V, GetStaticPathsInvalidRouteParam as W, PageNumberParamNotFound as X, DEFAULT_404_COMPONENT as Y, ActionNotFoundError as Z, NoMatchingStaticPathFound as _, UnsupportedImageConversion as a, ReservedSlotName as a0, renderSlotToString as a1, renderJSX as a2, chunkToString as a3, isRenderInstruction as a4, ForbiddenRewrite as a5, SessionStorageInitError as a6, SessionStorageSaveError as a7, ASTRO_VERSION as a8, CspNotEnabled as a9, green as aa, LocalsReassigned as ab, generateCspDigest as ac, PrerenderClientAddressNotAvailable as ad, clientAddressSymbol as ae, ClientAddressNotAvailable as af, StaticClientAddressNotAvailable as ag, AstroResponseHeadersReassigned as ah, responseSentSymbol as ai, renderPage as aj, REWRITE_DIRECTIVE_HEADER_KEY as ak, REWRITE_DIRECTIVE_HEADER_VALUE as al, renderEndpoint as am, LocalsNotAnObject as an, REROUTABLE_STATUS_CODES as ao, nodeRequestAbortControllerCleanupSymbol as ap, getAugmentedNamespace as aq, commonjsGlobal as ar, NOOP_MIDDLEWARE_HEADER as as, REDIRECT_STATUS_CODES as at, ActionsReturnedInvalidDataError as au, escape as av, MissingSharp as aw, ExpectedImageOptions as b, ExpectedNotESMImage as c, InvalidImageService as d, createComponent as e, createAstro as f, ImageMissingAlt as g, addAttribute as h, ExperimentalFontsNotEnabled as i, FontFamilyNotFound as j, renderHead as k, renderSlot as l, maybeRenderHead as m, renderComponent as n, renderScript as o, decodeKey as p, decryptString as q, renderTemplate as r, spreadAttributes as s, toStyleString as t, unescapeHTML as u, createSlotValueFromString as v, isAstroComponentFactory as w, REROUTE_DIRECTIVE_HEADER as x, i18nNoLocaleFoundInPath as y, ResponseSentError as z };
+export { chunkToString as $, AstroError as A, colors as B, ActionNotFoundError as C, MiddlewareNoDataOrNextCalled as D, ExpectedImage as E, FailedToFetchRemoteImageDimensions as F, MiddlewareNotAResponse as G, originPathnameSymbol as H, IncompatibleDescriptorOptions as I, RewriteWithBodyUsed as J, GetStaticPathsRequired as K, LocalImageUsedWrongly as L, MissingImageDimension as M, NoImageMetadata as N, InvalidGetStaticPathsReturn as O, InvalidGetStaticPathsEntry as P, GetStaticPathsExpectedParams as Q, ROUTE_TYPE_HEADER as R, GetStaticPathsInvalidRouteParam as S, PageNumberParamNotFound as T, UnsupportedImageFormat as U, DEFAULT_404_COMPONENT as V, NoMatchingStaticPathFound as W, PrerenderDynamicEndpointPathCollide as X, ReservedSlotName as Y, renderSlotToString as Z, renderJSX as _, UnsupportedImageConversion as a, isRenderInstruction as a0, ForbiddenRewrite as a1, SessionStorageInitError as a2, SessionStorageSaveError as a3, ASTRO_VERSION as a4, CspNotEnabled as a5, LocalsReassigned as a6, generateCspDigest as a7, PrerenderClientAddressNotAvailable as a8, clientAddressSymbol as a9, ClientAddressNotAvailable as aa, StaticClientAddressNotAvailable as ab, AstroResponseHeadersReassigned as ac, responseSentSymbol as ad, renderPage as ae, REWRITE_DIRECTIVE_HEADER_KEY as af, REWRITE_DIRECTIVE_HEADER_VALUE as ag, renderEndpoint as ah, LocalsNotAnObject as ai, REROUTABLE_STATUS_CODES as aj, nodeRequestAbortControllerCleanupSymbol as ak, getAugmentedNamespace as al, commonjsGlobal as am, NOOP_MIDDLEWARE_HEADER as an, REDIRECT_STATUS_CODES as ao, ActionsReturnedInvalidDataError as ap, escape as aq, MissingSharp as ar, ExpectedImageOptions as b, ExpectedNotESMImage as c, InvalidImageService as d, createComponent as e, createAstro as f, ImageMissingAlt as g, addAttribute as h, ExperimentalFontsNotEnabled as i, FontFamilyNotFound as j, renderHead as k, renderSlot as l, maybeRenderHead as m, renderComponent as n, renderScript as o, decodeKey as p, decryptString as q, renderTemplate as r, spreadAttributes as s, toStyleString as t, unescapeHTML as u, createSlotValueFromString as v, isAstroComponentFactory as w, REROUTE_DIRECTIVE_HEADER as x, i18nNoLocaleFoundInPath as y, ResponseSentError as z };
