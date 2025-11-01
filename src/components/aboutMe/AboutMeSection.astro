@@ -1,41 +1,97 @@
-<div class="containerAboutMe">
-  <h1>AboutMe</h1>
+---
+import { Image } from "astro:assets";
+import thomas from "@/assets/images/thomas.png";
+---
+
+<section class="containerAboutMe">
+  <h1>Sobre <span>mí</span></h1>
   <div class="content">
-    <div>
-      <p>
-        I'm a passionate full-stack developer with a keen eye for creating
-        elegant, efficient solutions. My journey in software development began
-        with a curiosity for how things work and evolved into a career of
-        building impactful digital experiences. I specialize in modern web
-        technologies, from crafting pixel-perfect user interfaces to
-        architecting scalable backend systems. I believe in writing clean,
-        maintainable code and staying current with industry best practices. When
-        I'm not coding, you'll find me exploring new technologies, contributing
-        to open-source projects, or sharing knowledge with the developer
-        community.
-      </p>
+    <div class="textAboutMe">
+      <p>Me apasiona aprender sobre las <span class="highlight">mejores prácticas del desarrollo</span> para aplicarlas en mis proyectos y ofrecer <span class="highlight">productos de alta calidad</span>.</p>
+      <p>Disfruto ser <span class="highlight">autodidacta</span> y absorber todo tipo de conocimientos; creo firmemente que esa es la clave para convertirse en un <span class="highlight">desarrollador</span> y una <span class="highlight">persona de calidad</span>.</p>
+      <p>Soy un apasionado de la <span class="highlight">poesía</span>, la <span class="highlight">ciencia</span> y la <span class="highlight">música</span> — gusto especialmente por <span class="highlight">rap</span>, <span class="highlight">drill</span>, <span class="highlight">jazz</span> y <span class="highlight">blues</span>. En mis tiempos libres (ya no) escribo poesía; he competido a nivel <span class="highlight">estatal</span> y soy autor de los poemarios <span class="highlight">“Preludio a mi averno”</span> (ganador de podio estatal) y <span class="highlight">“Obstat Nusquam”</span>.</p>
+      <p>Actualmente, uno de mis pasatiempos es la <span class="highlight">inversión en la bolsa de valores</span>, operando principalmente con el bróker <span class="highlight">Webull</span>.</p>
+      <p class="frase">“No es sabio el que sabe mucho, sino el que más sabe de lo correcto” <span>- Solitario</span></p>
     </div>
-    <div>
-        <div>
-            Years experiences
-        </div>
-        <div>
-            Years experiences
-        </div>
-        <div>
-            Years experiences
-        </div>
-        <div>
-            Years experiences
-        </div>
+
+    <div class="imageAboutMe">
+      <Image 
+        src={thomas} 
+        alt="Foto de Thomas" 
+        width={300} 
+        height={300} 
+        format="webp"
+        class="profileImage"
+      />
     </div>
   </div>
-</div>
+</section>
 
 <style>
-  .containerAboutMe{
-    height: 100dvh;
-    color: var(--text-color);
-    background-color: var(--clr-dark-space);
+  section {
+    min-height: 100dvh;
+    color: var(--clr-light-text);
+    background-color: var(--clr-dark-slate);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 3rem;
+  }
+
+  h1 span {
+    color: var(--clr-accent);
+  }
+
+  p {
+    text-align: left;
+    line-height: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .frase {
+    margin-top: 2rem;
+    font-style: italic;
+    text-align: center;
+    color: var(--clr-accent);
+  }
+
+  .frase span {
+    color: var(--clr-text-secundary);
+    font-style: normal;
+    margin-left: 0.5rem;
+  }
+
+  .highlight {
+    color: var(--clr-highlight);
+    font-weight: 600;
+  }
+
+  .textAboutMe {
+    max-width: 900px;
+  }
+
+  .profileImage {
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .profileImage:hover {
+    transform: scale(1.05);
   }
 </style>
