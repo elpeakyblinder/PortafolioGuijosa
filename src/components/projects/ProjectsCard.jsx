@@ -57,7 +57,7 @@ export default function ProjectCard({ project, index }) {
                         <motion.div animate={isHovered ? { rotate: 360 } : { rotate: 0 }} transition={{ duration: 0.6 }}>
                             <Sparkles className="w-5 h-5 text-[var(--clr-accent)]" />
                         </motion.div>
-                        <h3 className="text-2xl text-[var(--clr-light-text)]">{project.title}</h3>
+                        <h3 className="text-2xl text-[var(--clr-light-text)] text-left">{project.title}</h3>
                     </div>
                     <p
                         className="text-[var(--clr-text-secundary)] mb-6 leading-relaxed text-left"
