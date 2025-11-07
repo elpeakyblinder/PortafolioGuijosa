@@ -7,20 +7,25 @@ export default function SocialLinks() {
                 href="https://github.com/elpeakyblinder"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Perfil de GitHub de Carlos Guijosa"
                 className="flex items-center gap-2 hover:text-[var(--clr-accent)] transition-colors"
             >
                 <Github size={20} />
             </a>
+
             <a
                 href="https://linkedin.com/in/carlos-guijosa"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Perfil de LinkedIn de Carlos Guijosa"
                 className="flex items-center gap-2 hover:text-[var(--clr-accent)] transition-colors"
             >
                 <Linkedin size={20} />
             </a>
+
             <a
                 href="mailto:devcharlying@gmail.com"
+                aria-label="Enviar correo a Carlos Guijosa"
                 className="flex items-center gap-2 hover:text-[var(--clr-accent)] transition-colors"
             >
                 <Mail size={20} />

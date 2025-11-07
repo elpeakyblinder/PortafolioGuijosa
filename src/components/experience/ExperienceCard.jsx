@@ -65,7 +65,7 @@ export default function ExperienceCard({ experience, index }) {
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2 text-sm">
-                                    <span className="flex items-center gap-1.5 px-3 py-1 bg-[var(--clr-accent)]/10 border border-[var(--clr-accent)]/20 rounded-full text-[var(--clr-accent)]">
+                                    <span className="flex items-center gap-1.5 px-3 py-1 bg-[var(--clr-accent)]/4 border border-[var(--clr-accent)]/20 rounded-full text-[var(--clr-accent)]">
                                         <Calendar className="w-3.5 h-3.5" />
                                         {experience.period}
                                     </span>

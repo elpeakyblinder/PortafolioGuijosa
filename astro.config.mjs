@@ -13,6 +13,7 @@ export default defineConfig({
   output: 'server',
   adapter: vercel({}),
   integrations: [react()],
+  compressHTML: true,
 
   vite: {
     plugins: [tailwindcss()],
@@ -24,5 +25,8 @@ export default defineConfig({
     optimizeDeps: {
       include: ["lucide-react"],
     },
+    build: {
+      minify: 'terser'
+    }
   },
 });

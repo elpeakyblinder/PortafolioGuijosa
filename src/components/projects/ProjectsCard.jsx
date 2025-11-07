@@ -57,7 +57,7 @@ export default function ProjectCard({ project, index }) {
                         <motion.div animate={isHovered ? { rotate: 360 } : { rotate: 0 }} transition={{ duration: 0.6 }}>
                             <Sparkles className="w-5 h-5 text-[var(--clr-accent)]" />
                         </motion.div>
-                        <h3 className="text-2xl text-[var(--clr-light-text)]">{project.title}</h3>
+                        <h2 className="text-2xl text-left text-[var(--clr-light-text)]">{project.title}</h2>
                     </div>
                     <p
                         className="text-[var(--clr-text-secundary)] mb-6 leading-relaxed text-left"
@@ -72,9 +72,7 @@ export default function ProjectCard({ project, index }) {
                             ))}
                         </div>
                         <div className="flex items-center gap-4 ml-auto">
-                            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-[var(--clr-text-secundary)] hover:text-[var(--clr-accent)] transition-colors">
-                                <Github className="w-4 h-4" /> Code
-                            </a>
+                            
                             {project.detailsUrl && (
                                 <motion.a
                                     href={project.detailsUrl}

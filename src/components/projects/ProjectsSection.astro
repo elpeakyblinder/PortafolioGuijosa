@@ -1,15 +1,15 @@
 ---
 import ProjectsCard from "./ProjectsCard.jsx";
 
-import projectImg1 from "@/assets/images/pos/administration.png";
-import projectImg2 from "@/assets/images/nakawe/colecciones.png";
-import projectImg3 from "@/assets/images/perfumes/escritorio.png";
+import projectImg1 from "@/assets/images/pos/administration.webp";
+import projectImg2 from "@/assets/images/nakawe/colecciones.webp";
+import projectImg3 from "@/assets/images/perfumes/escritorio.webp";
 
 const projects = [
     {
         id: 1,
         title: "Punto de venta corporativo - Desktop Interfaz moderna",
-        description: "Punto de Venta corporativo desarrollado con Python y PyQt6, diseñado para optimizar las operaciones comerciales con una interfaz intuitiva, moderna, funcionalidades robustas y librería propia para lograr animaciones modernas. Conexión con terminar MercadoPago. Enfocado para la mayoria de giros comerciales.",
+        description: "Punto de Venta corporativo desarrollado con Python y PyQt6, diseñado para optimizar las operaciones comerciales con una interfaz intuitiva y moderna, funcionalidades robustas, y librería propia para lograr animaciones de atractivas. Conexión con terminal MercadoPago. Enfocado para la mayoria de giros comerciales.",
         image: projectImg1.src,
         detailsUrl: "/projects/punto-de-venta",
         year: "2024 - En curso",
@@ -22,7 +22,7 @@ const projects = [
         id: 2,
         title: "Nakawé - Web full-stack e-commerce",
         description:
-            'Desarrollo de una plataforma web full-stack que integra funciones informativas, administrativas y de comercio electrónico, utilizando tecnologías modernas para ofrecer soluciones eficientes y robustas. Consumiendo APis de PayPal y Stripe para la pasarela de pagos. Desarrollo colaborativo con <a href="https://github.com/DiegoPasaye" target="_blank" rel="noopener noreferrer" class="font-bold">DiegoPasaye</a>.',
+            'Desarrollo de una plataforma web full-stack que integra funciones informativas, administrativas y de comercio electrónico, utilizando tecnologías modernas para ofrecer soluciones eficientes y robustas. Consumo de APis de PayPal y Stripe para la pasarela de pagos. Desarrollo colaborativo con <a href="https://github.com/DiegoPasaye" target="_blank" rel="noopener noreferrer" class="font-bold">DiegoPasaye</a>.',
         image: projectImg2.src,
         detailsUrl: "/projects/web-full-stack",
         year: "2025 - En curso",
@@ -35,10 +35,10 @@ const projects = [
         id: 3,
         title: "Diario de perfumes - App Móvil",
         description:
-            "Proyecto universitario desarrollado con React y Ionic, app para registrar y guardar los perfumes favoritos de una personas o uno mismo. Utilizando LocalStorage para guardar los datos de los perfumes. La idea a futuro era que la app pudiera dar links de compra de los perfumes favoritos.",
+            "Proyecto universitario desarrollado con React y Ionic, app móvil para los aficionados de la perfumería registren y guarden los perfumes de su interes en visitas a tiendas como posible futura compra. Utilizando LocalStorage para guardar los datos pertinentes. La idea a futuro es que la app ofrezca links directos de compra de los perfumes favoritos en amazon y mercado libre de proveedores oficiales y confiables para evitar caer en compras de perfumes clon.",
         image: projectImg3.src,
         detailsUrl: "/projects/app-movil",
-        year: "2025 - Finalizado",
+        year: "2025 - pausado",
         tags: ["React", "Ionic", "LocalStorage", "Tailwind CSS", "TypeScript"],
         gradient: "from-green-500/10",
         repoUrl: "https://github.com/tu-usuario/tu-repo-2",
@@ -47,7 +47,7 @@ const projects = [
 ];
 ---
 
-<section class="containerProjects">
+<section id="projects" class="containerProjects">
     <div class="titleSection">
         <h1>Proyectos <span>Destacados</span></h1>
         <p>

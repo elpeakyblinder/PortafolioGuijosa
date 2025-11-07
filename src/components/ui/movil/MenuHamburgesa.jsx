@@ -2,7 +2,16 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SocialLinks from "@/components/ui/SocialLinks.jsx";
 
-export default function MobileMenu({ isOpen }) {
+const navItems = [
+    { label: "Inicio", id: "inicio" },
+    { label: "Proyectos", id: "projects" },
+    { label: "Experiencia", id: "experience" },
+    { label: "Habilidades", id: "skills" },
+    { label: "Contacto", id: "contact" },
+    { label: "Sobre mí", id: "aboutMe" }
+];
+
+export default function MobileMenu({ isOpen, onClose, className }) {
     const menuVariants = {
         hidden: { opacity: 0, y: -50, scale: 0.9 },
         visible: {
@@ -38,22 +47,23 @@ export default function MobileMenu({ isOpen }) {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="fixed top-0 left-0 w-full h-screen bg-[var(--clr-dark-space)] z-40 flex flex-col items-center justify-center overflow-hidden backdrop-blur-md"
+                    className={`fixed top-0 left-0 w-full h-screen bg-[var(--clr-dark-space)] z-40 flex flex-col items-center justify-center overflow-hidden backdrop-blur-md ${className || ''}`}
                 >
                     <motion.nav
                         variants={menuVariants}
                         className="flex flex-col items-center justify-center h-full gap-10 text-3xl font-semibold text-[var(--clr-text-secundary)]"
                     >
-                        {["About", "Skills", "Projects", "Contact"].map((item) => (
+                        {navItems.map((item) => (
                             <motion.a
-                                key={item}
-                                href={`#${item.toLowerCase()}`}
+                                key={item.id}
+                                href={`#${item.id}`}
+                                onClick={onClose}
                                 variants={linkVariants}
                                 className="hover:text-[var(--clr-accent)] transition-colors"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                {item}
+                                {item.label}
                             </motion.a>
                         ))}
 
@@ -62,7 +72,7 @@ export default function MobileMenu({ isOpen }) {
                             variants={linkVariants}
                             className="mt-12"
                         >
-                            <SocialLinks client:idle />
+                            <SocialLinks />
                         </motion.div>
                     </motion.nav>
                 </motion.div>

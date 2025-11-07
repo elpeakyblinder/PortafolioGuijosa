@@ -1,17 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
-export default function MenuButton({ onClick }) {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleClick = () => {
-        setIsOpen(!isOpen);
-        if (onClick) onClick();
-    };
-
+export default function MenuButton({ isOpen, onClick }) {
     return (
         <motion.button
-            onClick={handleClick}
+            onClick={onClick}
             className="z-50 md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-full bg-[var(--clr-dark-space)] shadow-lg hover:scale-105 transition-transform duration-300"
             whileTap={{ scale: 0.9 }}
             aria-label="Menu"
