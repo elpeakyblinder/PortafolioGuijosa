@@ -1,5 +1,7 @@
 <footer class="footer">
-  <p>© 2025 <span>Guijosa</span>. Todos los derechos reservados.</p>
+  <div>
+    <p>© 2025 <span>Guijosa</span>. Todos los derechos reservados.</p>
+  </div>
   <div class="socials">
     <a href="https://www.instagram.com/guijosa__/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
@@ -21,7 +23,7 @@
     width: 100%;
     padding: 1.5rem 0;
     text-align: center;
-    background-color: var(--clr-dark-slate);
+    background-color: var(--clr-dark-space);
     color: var(--clr-text-secundary);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9rem;
@@ -41,13 +43,14 @@
   .socials {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-top: 0.5rem;
   }
 
   .icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     color: var(--clr-accent);
     transition: color 0.3s ease, transform 0.2s ease;
   }
