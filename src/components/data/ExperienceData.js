@@ -1,10 +1,29 @@
 export const experiences = [
     {
         id: 1,
+        title: "Co-Founder & Full Stack Lead",
+        company: "NoMaTech",
+        location: "Morelia, Michoacán",
+        period: "2026 - Actualidad",
+        duration: "Actual",
+        description:
+            "Cofundador y líder técnico de NoMaTech, empresa especializada en automatización inteligente de procesos empresariales. Desde la orquestación de flujos documentales complejos (licitaciones gubernamentales con pipelines de IA) hasta soluciones de automatización a medida — tanto nativas como no-code — para la modernización digital de negocios. Desarrollo de plataformas con integración de tokenización, Web3 y arquitecturas serverless.",
+        achievements: [
+            "Diseño y desarrollo del sistema de automatización de licitaciones con pipelines de IA (Gemini + Azure Document Intelligence).",
+            "Implementación de arquitectura WebSocket para procesamiento en tiempo real de documentación compleja.",
+            "Desarrollo de soluciones de automatización empresarial end-to-end adaptadas a cada cliente.",
+            "Integración de tecnologías Web3 y tokenización en flujos de negocio.",
+        ],
+        technologies: ["Next.js", "FastAPI", "Python", "TypeScript", "Solidity", "Gemini API", "Azure Document Intelligence", "WebSockets", "SQLAlchemy", "Supabase"],
+        icon: "Rocket",
+        color: "from-[var(--clr-accent)]/20 to-[var(--clr-accent)]/5",
+    },
+    {
+        id: 2,
         title: "Full Stack Developer y diseñador UI/UX",
         company: "Nakawé",
         location: "Chiapas, México (Remoto)",
-        period: "2023 - Actualidad",
+        period: "2025",
         duration: "1 año",
         description:
             "Desarrollo de una web full-stack para la fines informativos, administrativos y de comercio electrónico. Diseñé todo el UX/UI en Figma, diseñé la base de datos y trabajé indiviualmente el 90% del módulo de marketplace, incluyendo integración con pasarelas de pago y funcionalidades de administración.",
@@ -19,7 +38,7 @@ export const experiences = [
         color: "from-[var(--clr-accent)]/20 to-[var(--clr-accent)]/5", 
     },
     {
-        id: 2,
+        id: 3,
         title: "Full Stack Developer",
         company: "DataPc",
         location: "Tijuana, Baja California",
