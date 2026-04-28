@@ -25,3 +25,15 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# claude
+.claude/
+
+# markdown sueltos
+*.md
+!README.md
+
+# imágenes originales (solo webp se sube)
+src/assets/images/**/*.png
+src/assets/images/**/*.jpg
+src/assets/images/**/*.jpeg
