@@ -28,35 +28,35 @@ export default function ExperienceCard({ experience, index }) {
             className="relative group"
         >
             {index !== experience.totalItems - 1 && (
-                <div className="absolute left-6 top-24 w-0.5 h-full bg-gradient-to-b from-[var(--clr-accent)]/40 to-transparent hidden md:block" />
+                <div className="absolute left-6 top-24 w-0.5 h-full bg-linear-to-b from-(--clr-accent)/40 to-transparent hidden md:block" />
             )}
 
             <div className="flex gap-6 md:gap-8">
-                <div className="relative flex-shrink-0">
+                <div className="relative shrink-0">
                     <motion.div
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${experience.color} border border-[var(--clr-accent)]/20 flex items-center justify-center backdrop-blur-sm relative z-10`}
+                        className={`w-12 h-12 rounded-xl bg-linear-to-br ${experience.color} border border-(--clr-accent)/20 flex items-center justify-center backdrop-blur-sm relative z-10`}
                     >
-                        <Icon className="w-6 h-6 text-[var(--clr-accent)]" />
+                        <Icon className="w-6 h-6 text-(--clr-accent)" />
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 0.5, scale: 1 }}
-                        className="absolute inset-0 bg-[var(--clr-accent)]/20 rounded-xl blur-xl"
+                        className="absolute inset-0 bg-(--clr-accent)/20 rounded-xl blur-xl"
                     />
                 </div>
 
                 <div className="flex-1 pb-12">
-                    <div className="bg-[var(--clr-dark-slate)] border border-[var(--clr-accent)]/20 rounded-2xl p-6 hover:border-[var(--clr-accent)]/70 transition-all duration-300 relative overflow-hidden group"
+                    <div className="bg-(--clr-dark-slate) border border-(--clr-accent)/20 rounded-2xl p-6 hover:border-(--clr-accent)/70 transition-all duration-300 relative overflow-hidden group"
                     >
-                        <div className={`absolute inset-0 bg-gradient-to-br ${experience.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                        <div className={`absolute inset-0 bg-linear-to-br ${experience.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                         <div className="relative z-10">
                             <div className="mb-4">
-                                <h3 className="text-2xl mb-2 text-[var(--clr-light-text)]">
+                                <h3 className="text-2xl mb-2 text-(--clr-light-text)">
                                     {experience.title}
                                 </h3>
-                                <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--clr-text-secundary)] mb-3">
-                                    <span className="flex items-center gap-1.5 text-[var(--clr-accent)]">
+                                <div className="flex flex-wrap items-center gap-3 text-sm text-(--clr-text-secundary) mb-3">
+                                    <span className="flex items-center gap-1.5 text-(--clr-accent)">
                                         <Briefcase className="w-4 h-4" />
                                         {experience.company}
                                     </span>
@@ -66,20 +66,20 @@ export default function ExperienceCard({ experience, index }) {
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2 text-sm">
-                                    <span className="flex items-center gap-1.5 px-3 py-1 bg-[var(--clr-accent)]/4 border border-[var(--clr-accent)]/20 rounded-full text-[var(--clr-accent)]">
+                                    <span className="flex items-center gap-1.5 px-3 py-1 bg-(--clr-accent)/4 border border-(--clr-accent)/20 rounded-full text-(--clr-accent)">
                                         <Calendar className="w-3.5 h-3.5" />
                                         {experience.period}
                                     </span>
-                                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[var(--clr-text-secundary)]">
+                                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-(--clr-text-secundary)">
                                         {experience.duration}
                                     </span>
                                 </div>
                             </div>
-                            <p className="text-[var(--clr-text-secundary)] mb-4 leading-relaxed">
+                            <p className="text-(--clr-text-secundary) mb-4 leading-relaxed">
                                 {experience.description}
                             </p>
                             <div className="mb-4">
-                                <h4 className="text-sm mb-2 text-[var(--clr-light-text)]">
+                                <h4 className="text-sm mb-2 text-(--clr-light-text)">
                                     Logros clave:
                                 </h4>
                                 <ul className="space-y-2">
@@ -90,9 +90,9 @@ export default function ExperienceCard({ experience, index }) {
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: index * 0.2 + idx * 0.1 }}
-                                            className="flex items-start gap-2 text-sm text-[var(--clr-text-secundary)]"
+                                            className="flex items-start gap-2 text-sm text-(--clr-text-secundary)"
                                         >
-                                            <div className="w-1.5 h-1.5 rounded-full bg-[var(--clr-accent)] mt-1.5 flex-shrink-0" />
+                                            <div className="w-1.5 h-1.5 rounded-full bg-(--clr-accent) mt-1.5 shrink-0" />
                                             <span>{achievement}</span>
                                         </motion.li>
                                     ))}
@@ -116,7 +116,7 @@ export default function ExperienceCard({ experience, index }) {
                                                 damping: 20     
                                             }
                                         }}
-                                        className="px-3 py-1 bg-[var(--clr-dark-space)] text-[var(--clr-text-secundary)] text-xs rounded-lg border border-white/20 hover:border-[var(--clr-accent)]/30 transition-colors cursor-default"
+                                        className="px-3 py-1 bg-(--clr-dark-space) text-(--clr-text-secundary) text-xs rounded-lg border border-white/20 hover:border-(--clr-accent)/30 transition-colors cursor-default"
                                     >
                                         {tech}
                                     </motion.span>

@@ -341,7 +341,7 @@ const navItems = [
             }
         }
 
-        document.querySelectorAll("[data-section]").forEach(link => {
+        document.querySelectorAll<HTMLElement>("[data-section]").forEach(link => {
             if (link.dataset.section === currentSection) {
                 link.classList.add("active");
             } else {

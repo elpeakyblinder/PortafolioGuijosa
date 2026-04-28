@@ -158,7 +158,7 @@ export default function CustomSelect({
                     onChange={onChange}
                     components={{
                         DropdownIndicator: () => (
-                            <ChevronDown className="w-4 h-4 opacity-70 mr-2 text-[var(--clr-accent)]" />
+                            <ChevronDown className="w-4 h-4 opacity-70 mr-2 text-(--clr-accent)" />
                         ),
                         Option: CustomOption,
                         SingleValue: CustomSingleValue,
