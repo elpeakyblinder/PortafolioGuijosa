@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import {Briefcase, Calendar, MapPin, TrendingUp, Award, Code2} from 'lucide-react';
+import {Briefcase, Calendar, MapPin, TrendingUp, Award, Code2, Rocket} from 'lucide-react';
 
 const iconMap = {
     Briefcase,
@@ -8,7 +8,8 @@ const iconMap = {
     MapPin,
     TrendingUp,
     Award,
-    Code2
+    Code2,
+    Rocket
 };
 
 export default function ExperienceCard({ experience, index }) {

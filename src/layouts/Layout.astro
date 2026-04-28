@@ -1,16 +1,81 @@
 ---
 import "../styles/global.css";
 import SonnerToaster from "@/components/ui/SonnerToaster.jsx";
+import ChatBot from "@/components/chatbot/ChatBot.tsx";
 
 export interface Props {
     title: string;
     description: string;
+    ogImage?: string;
 }
 
-const { 
-    title = "Guijosa | Portafolio", 
-    description = "Portafolio de Carlos Guijosa, Desarrollador Full Stack." 
+const {
+    title = "Guijosa | Portafolio",
+    description = "Portafolio de Carlos Guijosa, Desarrollador Full Stack.",
+    ogImage = "/og-image.webp"
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "https://guijosa.dev/#website",
+            "url": "https://guijosa.dev",
+            "name": "Carlos Guijosa | Desarrollador Full Stack",
+            "description": description,
+            "inLanguage": "es-MX"
+        },
+        {
+            "@type": "Person",
+            "@id": "https://guijosa.dev/#person",
+            "name": "Carlos Guijosa",
+            "url": "https://guijosa.dev",
+            "jobTitle": "Ingeniero en Gestión y Desarrollo de Software",
+            "description": "Desarrollador Full Stack especializado en Blockchain e Inteligencia Artificial",
+            "knowsAbout": ["Full Stack Development", "Blockchain", "Inteligencia Artificial", "React", "Node.js"],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Morelia",
+                "addressRegion": "Michoacán",
+                "addressCountry": "MX"
+            },
+            "sameAs": ["https://github.com/elpeakyblinder"]
+        },
+        {
+            "@type": "ProfessionalService",
+            "@id": "https://guijosa.dev/#service",
+            "name": "Carlos Guijosa - Desarrollo de Software",
+            "url": "https://guijosa.dev",
+            "description": "Servicios de desarrollo de software full-stack, blockchain e inteligencia artificial en Morelia, Michoacán",
+            "areaServed": {
+                "@type": "GeoCircle",
+                "geoMidpoint": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 19.7060,
+                    "longitude": -101.1950
+                },
+                "geoRadius": "50000"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 19.7060,
+                "longitude": -101.1950
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Morelia",
+                "addressRegion": "Michoacán",
+                "addressCountry": "MX"
+            },
+            "priceRange": "$$",
+            "provider": { "@id": "https://guijosa.dev/#person" }
+        }
+    ]
+};
 ---
 
 <!doctype html>
@@ -18,19 +83,61 @@ const {
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/png" href="/logo/logo.png" />
+        <link rel="icon" type="image/webp" href="/logo/logo.webp" />
+        <title>{title}</title>
+
+        <!-- SEO básico -->
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
+        <meta name="author" content="Carlos Guijosa" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <link rel="canonical" href={canonicalURL.href} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+
+        <!-- Idioma -->
+        <link rel="alternate" hreflang="es" href={canonicalURL.href} />
+        <link rel="alternate" hreflang="x-default" href={canonicalURL.href} />
+        <meta http-equiv="content-language" content="es-MX" />
+
+        <!-- GEO tags -->
+        <meta name="geo.region" content="MX-MIC" />
+        <meta name="geo.placename" content="Morelia, Michoacán" />
+        <meta name="geo.position" content="19.7060;-101.1950" />
+        <meta name="ICBM" content="19.7060, -101.1950" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL.href} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImageURL.href} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Carlos Guijosa - Desarrollador Full Stack" />
+        <meta property="og:locale" content="es_MX" />
+        <meta property="og:site_name" content="Carlos Guijosa | Portafolio" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImageURL.href} />
+        <meta name="twitter:image:alt" content="Carlos Guijosa - Desarrollador Full Stack" />
+
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap"
             rel="stylesheet"
         />
-        <title>{title}</title>
     </head>
     <body>
         <slot />
-        <SonnerToaster client:load />
+        <SonnerToaster client:idle />
+        <ChatBot client:idle />
     </body>
 </html>

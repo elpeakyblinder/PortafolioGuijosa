@@ -4,10 +4,25 @@ import ProjectsCard from "./ProjectsCard.jsx";
 import projectImg1 from "@/assets/images/pos/administration.webp";
 import projectImg2 from "@/assets/images/nakawe/colecciones.webp";
 import projectImg3 from "@/assets/images/perfumes/escritorio.webp";
+import projectImg4 from "@/assets/images/aetheos/aetheos.webp";
+import projectImg5 from "@/assets/images/goldsilver/goldsilver.webp";
+import projectImg6 from "@/assets/images/nomatech/nomatech.webp";
 
 const projects = [
     {
         id: 1,
+        title: "NoMaTech - Pipeline de Automatización Documental con IA para Licitaciones",
+        description: "Sistema full-stack de orquestación inteligente para la automatización end-to-end de procesos de licitación. El backend implementa pipelines de procesamiento basados en Azure Document Intelligence y Gemini API (upload → indexación → clasificación → orquestación), con canales WebSocket dedicados para streaming de progreso en tareas de larga duración. Incluye módulos de manipulación nativa de archivos (compresión, fusión de PDFs, generación de reportes Excel) y una arquitectura modular con orquestadores especializados para sincronización de Análisis de Precios Unitarios (APUs) entre módulos técnicos y económicos. El frontend presenta una interfaz de alta fluidez con componentes accesibles (Radix UI), animaciones orquestadas (Framer Motion), drag-and-drop para carga masiva de documentos y descarga batch en ZIP, integrando un widget asistente de IA en tiempo real.",
+        image: projectImg6.src,
+        detailsUrl: "/projects/nomatech",
+        year: "2026 - En curso",
+        tags: ["Next.js 16", "FastAPI", "Python", "TypeScript", "Gemini API", "Azure Document Intelligence", "WebSockets", "SQLAlchemy", "Tailwind CSS", "Framer Motion", "Radix UI"],
+        gradient: "from-cyan-500/10",
+        repoUrl: "",
+        liveUrl: "",
+    },
+    {
+        id: 2,
         title: "Punto de venta corporativo - Desktop Interfaz moderna",
         description: "Punto de Venta corporativo desarrollado con Python y PyQt6, diseñado para optimizar las operaciones comerciales con una interfaz intuitiva y moderna, funcionalidades robustas, y librería propia para lograr animaciones de atractivas. Conexión con terminal MercadoPago. Enfocado para la mayoria de giros comerciales.",
         image: projectImg1.src,
@@ -19,7 +34,7 @@ const projects = [
         liveUrl: "#",
     },
     {
-        id: 2,
+        id: 3,
         title: "Nakawé - Web full-stack e-commerce",
         description:
             'Desarrollo de una plataforma web full-stack que integra funciones informativas, administrativas y de comercio electrónico, utilizando tecnologías modernas para ofrecer soluciones eficientes y robustas. Consumo de APis de PayPal y Stripe para la pasarela de pagos. Desarrollo colaborativo con <a href="https://github.com/DiegoPasaye" target="_blank" rel="noopener noreferrer" class="font-bold">DiegoPasaye</a>.',
@@ -32,7 +47,31 @@ const projects = [
         liveUrl: "#",
     },
     {
-        id: 3,
+        id: 4,
+        title: "Aetheos - Plataforma de Trading Competitivo Recreativo",
+        description: "Desarrollo de una plataforma web de trading competitivo recreativo que permite a los usuarios competir entre amigos simulando operaciones en los mercados financieros con dinero virtual y clasificaciones en tiempo real. Cuenta con un dashboard interactivo, gráficos avanzados y un diseño moderno destacando una interfaz glassmórfica. Integración con Supabase para autenticación y base de datos.",
+        image: projectImg4.src,
+        detailsUrl: "/projects/aetheos",
+        year: "2026 - En curso",
+        tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Recharts"],
+        gradient: "from-purple-500/10",
+        repoUrl: "",
+        liveUrl: "https://aetheos.vercel.app",
+    },
+    {
+        id: 5,
+        title: "Gold Silver Gym - Web App Integral y Bot Inteligente",
+        description: "Plataforma web moderna diseñada para la gestión, venta de membresías y administración de servicios del gimnasio \"Gold Silver Gym\". Cuenta con un dashboard de usuario intuitivo y pasarelas de pago integradas (Stripe y PayPal) para facilitar las transacciones. Como característica principal, el sistema integra un Bot de WhatsApp altamente responsivo utilizando la API oficial de Meta, lo que permite la atención automatizada a clientes, seguimiento de rutinas, resolución de dudas y envío de notificaciones en tiempo real directamente al celular del usuario.",
+        image: projectImg5.src,
+        detailsUrl: "/projects/gold-silver-gym",
+        year: "2026 - En curso",
+        tags: ["Astro", "React", "Tailwind CSS", "PostgreSQL", "Neon Serverless", "API de Meta (WhatsApp)", "Stripe", "PayPal", "Desplegado en Cloudflare"],
+        gradient: "from-yellow-500/10",
+        repoUrl: "",
+        liveUrl: "https://silvergoldgym.com",
+    },
+    {
+        id: 6,
         title: "Diario de perfumes - App Móvil",
         description:
             "Proyecto universitario desarrollado con React y Ionic, app móvil para los aficionados de la perfumería registren y guarden los perfumes de su interes en visitas a tiendas como posible futura compra. Utilizando LocalStorage para guardar los datos pertinentes. La idea a futuro es que la app ofrezca links directos de compra de los perfumes favoritos en amazon y mercado libre de proveedores oficiales y confiables para evitar caer en compras de perfumes clon.",

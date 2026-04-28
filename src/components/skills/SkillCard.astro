@@ -1,5 +1,5 @@
 ---
-import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-react'
+import { Globe, Server, Database, Cloud, Smartphone, Terminal, Brain, Plug} from 'lucide-react'
 ---
 
 <div class="skillCard">
@@ -21,6 +21,8 @@ import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-reac
             <li>Astro</li>
             <li>NextJS</li>
             <li>React</li>
+            <li>Framer Motion</li>
+            <li>Radix UI</li>
         </ul>
     </div>
 </div>
@@ -38,7 +40,9 @@ import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-reac
         <ul>
             <li>Laravel</li>
             <li>Python</li>
+            <li>FastAPI</li>
             <li>NodeJS</li>
+            <li>WebSockets</li>
         </ul>
     </div>
 </div>
@@ -54,7 +58,10 @@ import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-reac
     </div>
     <div>
         <ul>
+            <li>PostgreSQL</li>
             <li>Neon Serverless</li>
+            <li>Supabase</li>
+            <li>SQLAlchemy</li>
             <li>MariaDB</li>
             <li>MySQL</li>
         </ul>
@@ -107,6 +114,7 @@ import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-reac
     <div>
         <ul>
             <li>Git</li>
+            <li>Claude Code</li>
             <li>Figma</li>
             <li>Bruno</li>
             <li>VS Code</li>
@@ -115,7 +123,41 @@ import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-reac
     </div>
 </div>
 
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Brain /> </span>
+        </div>
+        <div class="title">
+            IA & Cloud
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>Gemini API</li>
+            <li>Azure Document Intelligence</li>
+        </ul>
+    </div>
+</div>
 
+<div class="skillCard">
+    <div class="skillHeader">
+        <div class="rounded-xl bg-[var(--clr-accent-transparent)]/20 icon p-2 transition-colors">
+            <span><Plug /> </span>
+        </div>
+        <div class="title">
+            Integraciones
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li>Stripe</li>
+            <li>PayPal</li>
+            <li>API de Meta (WhatsApp)</li>
+            <li>MercadoPago</li>
+        </ul>
+    </div>
+</div>
 
 <style>
     .skillCard{
@@ -128,7 +170,8 @@ import { Globe, Server, Database, Cloud, Smartphone, Terminal} from 'lucide-reac
         transition: all 0.3s ease-in-out;
         border: solid 1px var(--clr-accent-transparent);
         max-width: 400px;
-        height: 170px;
+        min-height: 170px;
+        height: auto;
     }
 
     .skillCard:hover{

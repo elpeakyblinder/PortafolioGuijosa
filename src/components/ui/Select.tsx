@@ -1,10 +1,17 @@
 import React from "react";
 import Select, { components, type SingleValue, type StylesConfig } from "react-select";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Globe, Server, Layout, Code2, Smartphone, Palette, LayoutDashboard, Brain, Workflow, MessageCircle, CreditCard, Coins, Rocket, Lightbulb, ShoppingCart, HelpCircle } from "lucide-react";
+
+const iconMap: Record<string, React.ElementType> = {
+    Globe, Server, Layout, Code2, Smartphone, Palette, LayoutDashboard,
+    Brain, Workflow, MessageCircle, CreditCard, Coins, Rocket, Lightbulb,
+    ShoppingCart, HelpCircle,
+};
 
 interface Option {
     value: string;
     label: string;
+    icon?: string;
 }
 
 interface CustomSelectProps {
@@ -106,6 +113,28 @@ const fadeSlideStyle = `
 }
 `;
 
+const IconLabel = ({ icon, label }: { icon?: string; label: string }) => {
+    const Icon = icon ? iconMap[icon] : null;
+    return (
+        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+            {Icon && <Icon size={16} style={{ color: "var(--clr-accent)", flexShrink: 0 }} />}
+            <span>{label}</span>
+        </div>
+    );
+};
+
+const CustomOption = (props: any) => (
+    <components.Option {...props}>
+        <IconLabel icon={props.data.icon} label={props.data.label} />
+    </components.Option>
+);
+
+const CustomSingleValue = (props: any) => (
+    <components.SingleValue {...props}>
+        <IconLabel icon={props.data.icon} label={props.data.label} />
+    </components.SingleValue>
+);
+
 export default function CustomSelect({
     options,
     placeholder,
@@ -131,6 +160,8 @@ export default function CustomSelect({
                         DropdownIndicator: () => (
                             <ChevronDown className="w-4 h-4 opacity-70 mr-2 text-[var(--clr-accent)]" />
                         ),
+                        Option: CustomOption,
+                        SingleValue: CustomSingleValue,
                     }}
                 />
             </div>

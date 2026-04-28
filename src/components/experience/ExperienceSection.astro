@@ -4,9 +4,9 @@ import ExperienceCard from "@/components/experience/ExperienceCard.jsx";
 import ExperienceTitle from "@/components/experience/ExperienceTitle.jsx";
 ---
 
-<section id="experience" class="py-24 px-4 bg-[var(--clr-dark-space)]">
+<section id="experience" class="py-24 px-4 bg-(--clr-dark-space)">
     <div class="max-w-5xl mx-auto">
-        <ExperienceTitle client:visible />
+        <ExperienceTitle client:idle />
 
         <div class="space-y-2">
             {
@@ -17,7 +17,7 @@ import ExperienceTitle from "@/components/experience/ExperienceTitle.jsx";
                             totalItems: experiences.length,
                         }}
                         index={index}
-                        client:visible
+                        client:idle
                     />
                 ))
             }

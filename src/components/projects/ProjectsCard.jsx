@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Sparkles, Github } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export default function ProjectCard({ project, index }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -44,7 +44,11 @@ export default function ProjectCard({ project, index }) {
                     <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-110"
+                        width={800}
+                        height={450}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--clr-dark-slate)] via-[var(--clr-dark-slate)]/50 to-transparent opacity-80" />
                     <div className="absolute top-4 right-4 px-3 py-1 bg-black/50 backdrop-blur-sm border border-[var(--clr-accent)]/10 rounded-full text-xs text-[var(--clr-accent)]">
