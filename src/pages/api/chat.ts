@@ -21,6 +21,7 @@ DATOS DE CARLOS GUIJOSA (responde con estos hechos, sin editorializar):
 - Áreas: desarrollo full-stack, automatización con IA, blockchain (Solidity)
 - Explorando: agentes de IA, plataformas no-code, APIs de LLMs, programación cuántica (IBM Quantum/Qiskit, Google Cirq/TensorFlow Quantum)
 - Intereses fuera del código: poesía (2 competencias estatales, 2 poemarios, uno premiado), filosofía, jazz, rap, blues
+- Redes sociales: Facebook → https://www.facebook.com/profile.php?id=61588672153982 (si preguntan por redes, Instagram, Facebook, o cómo seguirlo, comparte este link)
 - Stack: Next.js, React, Astro, Python, FastAPI, Node.js, TypeScript, Tailwind CSS, PostgreSQL, Supabase
 
 PROYECTOS (si preguntan, da datos técnicos sin calificarlos):
@@ -129,7 +130,7 @@ function buildNotificationEmail(data: { name: string; email: string; service: st
 </body></html>`;
 }
 
-function buildConfirmationEmail(name: string) {
+function buildConfirmationEmail(data: { name: string; service: string; message: string }) {
     return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;background-color:#1a1a2e;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
@@ -137,17 +138,30 @@ function buildConfirmationEmail(name: string) {
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background-color:#222831;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.3);">
         <tr><td style="background:linear-gradient(135deg,#222831 0%,#31363F 100%);padding:32px 40px;border-bottom:3px solid #76ABAE;">
-          <h1 style="margin:0;font-size:22px;color:#76ABAE;font-weight:600;">Carlos Guijosa</h1>
+          <h1 style="margin:0;font-size:22px;color:#76ABAE;font-weight:600;letter-spacing:0.5px;">Carlos Guijosa</h1>
           <p style="margin:6px 0 0;font-size:13px;color:#b0b0b0;">Desarrollador Full Stack</p>
         </td></tr>
         <tr><td style="padding:32px 40px 0;">
-          <h2 style="margin:0;font-size:20px;color:#EEEEEE;font-weight:600;">¡Hola ${name}!</h2>
+          <h2 style="margin:0;font-size:20px;color:#EEEEEE;font-weight:600;">¡Hola ${data.name}!</h2>
           <p style="margin:12px 0 0;color:#b0b0b0;font-size:15px;line-height:1.6;">
-            He recibido tu mensaje a través del chatbot. Gracias por tu interés, me pondré en contacto contigo en las próximas <strong style="color:#76ABAE;">24 horas</strong>.
+            He recibido tu mensaje correctamente. Gracias por tomarte el tiempo de contactarme, me pondré en contacto contigo en las próximas <strong style="color:#76ABAE;">24 horas</strong>.
           </p>
         </td></tr>
+        <tr><td style="padding:24px 40px 0;">
+          <h3 style="margin:0 0 16px;font-size:14px;color:#76ABAE;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Resumen de tu mensaje</h3>
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#31363F;border-radius:8px;overflow:hidden;">
+            <tr><td style="padding:14px 20px;border-bottom:1px solid #222831;">
+              <span style="color:#b0b0b0;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;">Servicio de interés</span><br>
+              <span style="display:inline-block;margin-top:4px;padding:4px 12px;background-color:#76ABAE20;color:#76ABAE;border-radius:20px;font-size:13px;font-weight:600;border:1px solid #76ABAE40;">${data.service}</span>
+            </td></tr>
+            <tr><td style="padding:14px 20px;">
+              <span style="color:#b0b0b0;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;">Tu mensaje</span><br>
+              <span style="color:#EEEEEE;font-size:14px;line-height:1.6;display:block;margin-top:6px;">${data.message.replace(/\n/g, '<br>')}</span>
+            </td></tr>
+          </table>
+        </td></tr>
         <tr><td style="padding:28px 40px 0;" align="center">
-          <a href="https://guijosa.dev" style="display:inline-block;padding:12px 32px;background-color:#76ABAE;color:#222831;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;">Visitar mi portafolio</a>
+          <a href="https://guijosa.dev" style="display:inline-block;padding:12px 32px;background-color:#76ABAE;color:#222831;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;letter-spacing:0.5px;">Visitar mi portafolio</a>
         </td></tr>
         <tr><td style="padding:28px 40px 32px;">
           <table width="100%" cellpadding="0" cellspacing="0">
@@ -207,16 +221,19 @@ export async function POST({ request }: APIContext): Promise<Response> {
         const match = aiMessage.match(bookingRegex);
 
         if (match) {
+            console.log('[Chatbot] Booking marker detectado');
+            console.log('[Chatbot] Raw booking data:', match[1]);
             try {
                 const bookingData = JSON.parse(match[1]);
                 const cleanMessage = aiMessage.replace(bookingRegex, '').trim();
+                console.log('[Chatbot] Parsed booking:', JSON.stringify(bookingData));
 
                 // Validate required fields
                 if (bookingData.name && bookingData.email && bookingData.service && bookingData.message) {
                     const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
                     // Email to Carlos
-                    await resend.emails.send({
+                    const { error: notifError } = await resend.emails.send({
                         from: import.meta.env.RESEND_FROM_EMAIL,
                         to: import.meta.env.CONTACT_EMAIL,
                         replyTo: bookingData.email,
@@ -224,21 +241,37 @@ export async function POST({ request }: APIContext): Promise<Response> {
                         html: buildNotificationEmail(bookingData),
                     });
 
+                    if (notifError) {
+                        console.error('[Chatbot] Error enviando notificación:', notifError);
+                    }
+
                     // Confirmation to client
-                    await resend.emails.send({
+                    const { error: confError } = await resend.emails.send({
                         from: import.meta.env.RESEND_FROM_EMAIL,
                         to: bookingData.email,
                         subject: '¡Mensaje recibido! — Carlos Guijosa',
-                        html: buildConfirmationEmail(bookingData.name),
+                        html: buildConfirmationEmail(bookingData),
                     });
+
+                    if (confError) {
+                        console.error('[Chatbot] Error enviando confirmación:', confError);
+                    }
 
                     return new Response(
                         JSON.stringify({ message: cleanMessage, booked: true }),
                         { status: 200, headers: { 'Content-Type': 'application/json' } }
                     );
+                } else {
+                    console.error('[Chatbot] Campos faltantes:', {
+                        name: !!bookingData.name,
+                        email: !!bookingData.email,
+                        service: !!bookingData.service,
+                        message: !!bookingData.message,
+                    });
                 }
             } catch (parseError) {
-                console.error('Booking parse error:', parseError);
+                console.error('[Chatbot] JSON parse error:', parseError);
+                console.error('[Chatbot] Raw string was:', match[1]);
             }
 
             // If parsing/validation failed, return cleaned message
@@ -247,6 +280,17 @@ export async function POST({ request }: APIContext): Promise<Response> {
                 JSON.stringify({ message: cleanMessage, booked: false }),
                 { status: 200, headers: { 'Content-Type': 'application/json' } }
             );
+        }
+
+        // Log last user message to check if booking was expected
+        const lastUserMsg = messages.filter((m: { role: string }) => m.role === 'user').pop();
+        if (lastUserMsg) {
+            const confirmWords = ['sí', 'si', 'confirmo', 'dale', 'adelante', 'va', 'ok', 'envía', 'envia', 'manda'];
+            const isConfirm = confirmWords.some((w) => lastUserMsg.content?.toLowerCase().includes(w));
+            if (isConfirm) {
+                console.warn('[Chatbot] Usuario probablemente confirmó booking pero LLM no generó marcador');
+                console.warn('[Chatbot] AI response:', aiMessage.substring(0, 200));
+            }
         }
 
         return new Response(
