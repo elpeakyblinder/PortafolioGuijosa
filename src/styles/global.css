@@ -37,6 +37,30 @@ html {
     scrollbar-gutter: stable;
 }
 
+/* Global scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-accent) var(--clr-dark-space);
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--clr-dark-space);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--clr-accent);
+    border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-light-text);
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--clr-dark-space);
