@@ -45,15 +45,27 @@ export default function ProjectCard({ project, index }) {
         >
             <div className="bg-(--clr-dark-slate) border border-(--clr-accent)/20 rounded-2xl overflow-hidden h-full hover:border-(--clr-accent)/70 transition-all duration-300 relative">
                 <div className="relative h-72 md:h-72 overflow-hidden">
-                    <img
-                        src={project.image}
-                        alt={project.title}
-                        width={800}
-                        height={450}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                    <picture className="block w-full h-full">
+                        <source
+                            srcSet={project.image.avifSrcset}
+                            sizes={project.image.sizes}
+                            type="image/avif"
+                        />
+                        <source
+                            srcSet={project.image.webpSrcset}
+                            sizes={project.image.sizes}
+                            type="image/webp"
+                        />
+                        <img
+                            src={project.image.src}
+                            alt={project.title}
+                            width={project.image.width}
+                            height={project.image.height}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                    </picture>
                     <div className="absolute inset-0 bg-linear-to-t from-(--clr-dark-slate) via-(--clr-dark-slate)/50 to-transparent opacity-80" />
                     <div className="absolute top-4 right-4 px-3 py-1 bg-black/50 backdrop-blur-sm border border-(--clr-accent)/10 rounded-full text-xs text-(--clr-accent)">
                         {project.year}

@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import ProjectsCard from "./ProjectsCard.jsx";
 
 import projectImg1 from "@/assets/images/pos/administration.webp";
@@ -7,13 +8,14 @@ import projectImg3 from "@/assets/images/perfumes/escritorio.webp";
 import projectImg4 from "@/assets/images/aetheos/aetheos.webp";
 import projectImg5 from "@/assets/images/goldsilver/goldsilver.webp";
 import projectImg6 from "@/assets/images/nomatech/nomatech.webp";
+import projectImg7 from "@/assets/images/dailyflow/reports.png";
 
 const projects = [
     {
         id: 1,
         title: "LicitaIA - Automatización con IA y código nativo para Licitaciones de obras públicas",
         description: "Sistema full-stack de orquestación inteligente para la automatización end-to-end de procesos de licitación. El backend implementa pipelines de procesamiento basados en Azure Document Intelligence y Gemini API (upload → indexación → clasificación → orquestación), con canales WebSocket dedicados para streaming de progreso en tareas de larga duración. Incluye módulos de manipulación nativa de archivos (compresión, fusión de PDFs, generación de reportes Excel) y una arquitectura modular con orquestadores especializados para sincronización de todos y cada uno de los anexos de una licitación de obra pública entre módulos técnicos y económicos. El frontend presenta una interfaz de alta fluidez con componentes accesibles. Proyecto desarrollado en NoMaTech.",
-        image: projectImg6.src,
+        image: projectImg6,
         detailsUrl: "/projects/nomatech",
         year: "2026 - En curso",
         tags: ["Next.js 16", "FastAPI", "Python", "TypeScript", "Gemini API", "Azure Document Intelligence", "WebSockets", "SQLAlchemy", "Tailwind CSS", "Framer Motion", "Radix UI"],
@@ -25,7 +27,7 @@ const projects = [
         id: 2,
         title: "Punto de venta corporativo - Desktop Interfaz moderna",
         description: "Punto de Venta corporativo desarrollado con Python y PyQt6, diseñado para optimizar las operaciones comerciales con una interfaz intuitiva y moderna, funcionalidades robustas, y librería propia para lograr animaciones de atractivas. Conexión con terminal MercadoPago. Enfocado para la mayoria de giros comerciales.",
-        image: projectImg1.src,
+        image: projectImg1,
         detailsUrl: "/projects/punto-de-venta",
         year: "2024 - En curso",
         tags: ["Python", "PyQt6", "MySQL"],
@@ -38,7 +40,7 @@ const projects = [
         title: "Nakawé - Web full-stack e-commerce",
         description:
             'Desarrollo de una plataforma web full-stack que integra funciones informativas, administrativas y de comercio electrónico, utilizando tecnologías modernas para ofrecer soluciones eficientes y robustas. Consumo de APis de PayPal y Stripe para la pasarela de pagos. Desarrollo colaborativo con <a href="https://github.com/DiegoPasaye" target="_blank" rel="noopener noreferrer" class="font-bold">DiegoPasaye</a>.',
-        image: projectImg2.src,
+        image: projectImg2,
         detailsUrl: "/projects/web-full-stack",
         year: "2025 - finalizado",
         tags: ["NextJS", "Neon Serverless", "Postgres", "CSS", "Tailwind CSS", "TypeScript", "Vercel", "Cloudflare"],
@@ -50,7 +52,7 @@ const projects = [
         id: 4,
         title: "Aetheos - Plataforma de Trading Competitivo Recreativo",
         description: "Desarrollo de una plataforma web de trading competitivo recreativo que permite a los usuarios competir entre amigos simulando operaciones en los mercados financieros con dinero virtual y clasificaciones en tiempo real. Cuenta con un dashboard interactivo, gráficos avanzados y un diseño moderno destacando una interfaz glassmórfica. Integración con Supabase para autenticación y base de datos.",
-        image: projectImg4.src,
+        image: projectImg4,
         detailsUrl: "/projects/aetheos",
         year: "2026 - demo",
         tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Recharts"],
@@ -62,7 +64,7 @@ const projects = [
         id: 5,
         title: "Gold Silver Gym - Web App Integral y Bot Inteligente",
         description: "Plataforma web moderna diseñada para la gestión, venta de membresías y administración de servicios del gimnasio \"Gold Silver Gym\". Cuenta con un dashboard de usuario intuitivo y pasarelas de pago integradas (Stripe y PayPal) para facilitar las transacciones. Como característica principal, el sistema integra un Bot de WhatsApp altamente responsivo utilizando la API oficial de Meta, lo que permite la atención automatizada a clientes, seguimiento de rutinas, resolución de dudas y envío de notificaciones en tiempo real directamente al celular del usuario. Proyecto desarrollado en NoMaTech.",
-        image: projectImg5.src,
+        image: projectImg5,
         detailsUrl: "/projects/gold-silver-gym",
         year: "2026 - demo",
         tags: ["Astro", "React", "Tailwind CSS", "PostgreSQL", "Neon Serverless", "API de Meta (WhatsApp)", "Stripe", "PayPal", "Desplegado en Cloudflare"],
@@ -71,11 +73,24 @@ const projects = [
         liveUrl: "https://silvergoldgym.com",
     },
     {
+        id: 7,
+        title: "DailyFlow - Gestión de Reportes Laborales Diarios",
+        description:
+            "Aplicación web full-stack para la gestión de reportes laborales diarios con sistema de roles (administrador/empleado). Permite a los empleados crear reportes con texto e imágenes (drag-and-drop, copy-paste y compresión automática en el cliente), y a los administradores gestionar usuarios, revisar reportes y exportarlos a PDF. Incluye autenticación con roles, zona horaria de México y rangos semanales.",
+        image: projectImg7,
+        detailsUrl: "",
+        year: "2026 - Demo",
+        tags: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Neon Serverless", "PostgreSQL", "NextAuth 5", "Vercel Blob", "@react-pdf/renderer", "sharp"],
+        gradient: "from-indigo-500/10",
+        repoUrl: "",
+        liveUrl: "",
+    },
+    {
         id: 6,
         title: "Diario de perfumes - App Móvil",
         description:
             "Proyecto universitario desarrollado con React y Ionic, app móvil para los aficionados de la perfumería registren y guarden los perfumes de su interes en visitas a tiendas como posible futura compra. Utilizando LocalStorage para guardar los datos pertinentes. La idea a futuro es que la app ofrezca links directos de compra de los perfumes favoritos en amazon y mercado libre de proveedores oficiales y confiables para evitar caer en compras de perfumes clon.",
-        image: projectImg3.src,
+        image: projectImg3,
         detailsUrl: "/projects/app-movil",
         year: "2025 - pausado",
         tags: ["React", "Ionic", "LocalStorage", "Tailwind CSS", "TypeScript"],
@@ -84,6 +99,29 @@ const projects = [
         liveUrl: "#",
     },
 ];
+
+const SIZES = "(max-width: 1024px) 100vw, 50vw";
+const WIDTHS = [400, 800, 1024];
+
+const processedProjects = await Promise.all(
+    projects.map(async (project) => {
+        const [avif, webp] = await Promise.all([
+            getImage({ src: project.image, widths: WIDTHS, sizes: SIZES, format: "avif" }),
+            getImage({ src: project.image, widths: WIDTHS, sizes: SIZES, format: "webp" }),
+        ]);
+        return {
+            ...project,
+            image: {
+                src: webp.src,
+                avifSrcset: avif.srcSet.attribute,
+                webpSrcset: webp.srcSet.attribute,
+                width: webp.attributes.width,
+                height: webp.attributes.height,
+                sizes: SIZES,
+            },
+        };
+    })
+);
 ---
 
 <section id="projects" class="containerProjects">
@@ -96,7 +134,7 @@ const projects = [
     <div class="cards">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
                 {
-                    projects.map((project, index) => (
+                    processedProjects.map((project, index) => (
                         <ProjectsCard
                             project={project}
                             index={index}
