@@ -66,6 +66,30 @@ body {
     background-color: var(--clr-dark-space);
 }
 
+/* Foco visible global para navegación por teclado */
+:focus-visible {
+    outline: 2px solid var(--clr-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
 body[data-scroll-locked] {
     overflow: visible !important;
     margin-right: 0 !important;
