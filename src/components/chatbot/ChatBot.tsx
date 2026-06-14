@@ -51,6 +51,19 @@ export default function ChatBot() {
         if (isOpen) setTimeout(() => inputRef.current?.focus(), 300);
     }, [isOpen]);
 
+    // Cerrar el chat con la tecla Escape
+    useEffect(() => {
+        if (!isOpen) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                window.speechSynthesis?.cancel();
+                setIsOpen(false);
+            }
+        };
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [isOpen]);
+
     const speak = (text: string) => {
         if (!ttsEnabled || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
         window.speechSynthesis.cancel();
@@ -273,7 +286,12 @@ export default function ChatBot() {
                         </div>
 
                         {/* Messages */}
-                        <div className="chatbot-messages">
+                        <div
+                            className="chatbot-messages"
+                            role="log"
+                            aria-live="polite"
+                            aria-label="Conversación con el asistente"
+                        >
                             {messages.map((msg, i) => (
                                 <motion.div
                                     key={msg.id}
@@ -431,6 +449,12 @@ export default function ChatBot() {
                         border-radius: 0;
                         bottom: 0;
                         right: 0;
+                    }
+
+                    .chatbot-mic,
+                    .chatbot-send {
+                        width: 44px;
+                        height: 44px;
                     }
                 }
 
