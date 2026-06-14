@@ -5,7 +5,7 @@ import { serviceOptions } from "@/components/data/Services.js";
 
 <section id="contact" >
     <div>
-        <h1>Trabajemos <span>Juntos</span></h1>
+        <h2>Trabajemos <span>Juntos</span></h2>
         <p>
             ¿Tienes una idea o proyecto en mente? Hablemos sobre cómo hacerlo
             realidad.
@@ -14,7 +14,7 @@ import { serviceOptions } from "@/components/data/Services.js";
     <div></div>
     <div class="formContainer">
         <div>
-            <h1 class="titleForm">Envíame un mensaje a mi Gmail</h1>
+            <h3 class="titleForm">Envíame un mensaje a mi Gmail</h3>
             <p>
                 Completa el formulario y me pondré en contacto contigo lo antes
                 posible.
@@ -60,7 +60,6 @@ import { serviceOptions } from "@/components/data/Services.js";
                         placeholder="Selecciona una opción"
                         name="service"
                         required={true}
-                        onChange={(option) => console.log(option?.value)}
                         client:only="react"
                     />
                     <input
@@ -102,7 +101,7 @@ import { serviceOptions } from "@/components/data/Services.js";
         height: auto;
     }
 
-    h1 {
+    h2 {
         font-size: 3rem;
         text-align: center;
     }
@@ -113,7 +112,7 @@ import { serviceOptions } from "@/components/data/Services.js";
         margin-bottom: 0.8rem;
     }
 
-    h1 span {
+    h2 span {
         color: var(--clr-accent);
     }
 

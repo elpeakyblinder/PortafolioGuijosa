@@ -1,10 +1,14 @@
 import React, { useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
+import { Sparkles, ExternalLink, Github } from 'lucide-react';
 
 export default function ProjectCard({ project, index }) {
     const [isHovered, setIsHovered] = useState(false);
     const cardRef = useRef(null);
+    const shouldReduceMotion = useReducedMotion();
+
+    const hasLiveUrl = project.liveUrl && project.liveUrl !== '#';
+    const hasRepoUrl = project.repoUrl && !project.repoUrl.includes('tu-usuario');
 
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -29,12 +33,12 @@ export default function ProjectCard({ project, index }) {
     return (
         <motion.div
             ref={cardRef}
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-            onMouseMove={handleMouseMove}
+            style={shouldReduceMotion ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
+            onMouseMove={shouldReduceMotion ? undefined : handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
             className="relative group h-full"
@@ -75,16 +79,31 @@ export default function ProjectCard({ project, index }) {
                                 </span>
                             ))}
                         </div>
-                        <div className="flex items-center gap-4 ml-auto">
-                            
-                            {project.detailsUrl && (
+                        <div className="flex items-center gap-3 ml-auto">
+                            {hasLiveUrl && (
                                 <motion.a
-                                    href={project.detailsUrl}
+                                    href={project.liveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Ver sitio en vivo de ${project.title}`}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     className="flex items-center gap-2 px-4 py-2 bg-(--clr-accent)/10 border border-(--clr-accent)/30 rounded-lg text-sm text-(--clr-accent) hover:bg-(--clr-accent)/20 transition-colors"
                                 >
-                                    View Details
+                                    <ExternalLink className="w-4 h-4" /> Ver sitio
+                                </motion.a>
+                            )}
+                            {hasRepoUrl && (
+                                <motion.a
+                                    href={project.repoUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Ver código de ${project.title} en GitHub`}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="flex items-center gap-2 px-4 py-2 border border-(--clr-accent)/30 rounded-lg text-sm text-(--clr-light-text) hover:bg-white/5 transition-colors"
+                                >
+                                    <Github className="w-4 h-4" /> Código
                                 </motion.a>
                             )}
                         </div>

@@ -82,8 +82,9 @@ const jsonLd = {
 <html lang="es">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/webp" href="/logo/logo.webp" />
+        <link rel="apple-touch-icon" href="/logo/logo.png" />
         <title>{title}</title>
 
         <!-- SEO básico -->
@@ -112,7 +113,7 @@ const jsonLd = {
         <meta property="og:description" content={description} />
         <meta property="og:image" content={ogImageURL.href} />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:height" content="634" />
         <meta property="og:image:alt" content="Carlos Guijosa - Desarrollador Full Stack" />
         <meta property="og:locale" content="es_MX" />
         <meta property="og:site_name" content="Carlos Guijosa | Portafolio" />
@@ -127,13 +128,21 @@ const jsonLd = {
         <!-- JSON-LD Structured Data -->
         <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-        <!-- Fonts -->
+        <!-- Fonts (no bloqueantes: se cargan async para no frenar el LCP) -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
+            rel="preload"
+            as="style"
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap"
-            rel="stylesheet"
+            onload="this.onload=null;this.rel='stylesheet'"
         />
+        <noscript>
+            <link
+                href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap"
+                rel="stylesheet"
+            />
+        </noscript>
     </head>
     <body>
         <slot />

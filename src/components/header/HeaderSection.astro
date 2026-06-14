@@ -38,7 +38,7 @@ const navItems = [
         </div>
 
         <!-- Hamburger button (mobile) -->
-        <button id="menu-toggle" class="menu-btn" aria-label="Menu">
+        <button id="menu-toggle" class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
             <span class="bar bar-1"></span>
             <span class="bar bar-2"></span>
             <span class="bar bar-3"></span>
@@ -354,17 +354,37 @@ const navItems = [
     function toggleMenu() {
         const isOpen = mobileMenu?.classList.toggle("open");
         menuBtn?.classList.toggle("open", isOpen);
+        menuBtn?.setAttribute("aria-expanded", String(!!isOpen));
+        menuBtn?.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
     }
 
     function closeMenu() {
         mobileMenu?.classList.remove("open");
         menuBtn?.classList.remove("open");
+        menuBtn?.setAttribute("aria-expanded", "false");
+        menuBtn?.setAttribute("aria-label", "Abrir menú");
     }
 
-    // Event listeners
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("scroll", handleScrollSpy, { passive: true });
+    // Scroll → un solo listener throttled con requestAnimationFrame
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            handleScroll();
+            handleScrollSpy();
+            ticking = false;
+        });
+    }, { passive: true });
+
     menuBtn?.addEventListener("click", toggleMenu);
+
+    // Cerrar menú con tecla Escape
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu?.classList.contains("open")) {
+            closeMenu();
+        }
+    });
 
     // Close menu on mobile link click
     document.querySelectorAll(".mobile-link").forEach(link => {
