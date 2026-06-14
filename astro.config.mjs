@@ -10,7 +10,7 @@ import { fileURLToPath } from "url";
 // https://astro.build/config
 export default defineConfig({
   site: "https://guijosa.dev",
-  adapter: vercel({ imageService: true }),
+  adapter: vercel(),
   integrations: [react(), sitemap()],
   compressHTML: true,
   prefetch: { prefetchAll: true, defaultStrategy: "viewport" },
